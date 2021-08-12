@@ -1,0 +1,27 @@
+{
+  "name": "ind21-poker-planner-fe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshtechnologygroup/ind21-poker-planner-FE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshtechnologygroup/ind21-poker-planner-FE/issues"
+  },
+  "homepage": "https://github.com/joshtechnologygroup/ind21-poker-planner-FE#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
+  }
+}
