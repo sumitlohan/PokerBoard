@@ -1,1 +1,4 @@
-var app = angular.module("pokerPlanner", []);
+'use strict';
+(function () {
+    var app = angular.module("pokerPlanner", []);
+})();
