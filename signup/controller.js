@@ -11,8 +11,9 @@
           signupService
         ) {
     
-            $scope.errorEmail = false;
-    
+            $scope.isEmailError = false;
+            $scope.isError = false;
+            $scope.errorMsg = "";
 
             $scope.signup = function() {
               user = {
@@ -26,7 +27,10 @@
                 // go to login
               }, function(error) {
                 if(error.data.errors.email === "is already taken.") {
-                  $scope.errorEmail = true;
+                  $scope.isEmailError = true;
+                } else {
+                  $scope.isError = true;
+                  $scope.errorMsg = error;
                 }
               })
             };
@@ -35,22 +39,5 @@
               // go to login
             };
     }]);
-
-    angular.module('pokerPlanner').directive('matchPass', function() {
-      return {
-        require: 'ngModel',
-        scope: {
-          confirmPassword: '=matchPass'
-        },
-        link: function (scope, element, attributes, paramval) {
-          paramval.$validators.matchPass = function(val) {
-            return val == scope.confirmPassword;
-          };
-          scope.$watch("confirmPassword", function() {
-            paramval.$validate();
-          });
-        }
-      };
-    });
     
 })();

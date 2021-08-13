@@ -1,19 +1,11 @@
 .signup-form {
     padding: 20px;
-    max-width: 40%;
+    max-width: 35%;
     margin: auto;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.signup h1 {
-    font-size: 40px;
-}
-
-.signup h2 {
-    margin-bottom: 40px;
 }
 
 .signup-field {
@@ -22,31 +14,8 @@
 
 .signup-field input {
     width: 300px;
-    padding: 12px 20px;
     margin: 10px 0;
     border: 1px solid #ccc;
-}
-
-button {
-    align-self: flex-end;
-    background-color: #04AA6D;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.8;
-}
-
-button[disabled] {
-    cursor: not-allowed;
-}
-
-button[disabled]:hover {
-    opacity: 1;
 }
 
 .invalid {
