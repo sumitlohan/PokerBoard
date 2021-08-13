@@ -1,4 +1,8 @@
 'use strict';
 (function () {
-    var app = angular.module("pokerPlanner", []);
+    angular.module("pokerPlanner", [
+        'ui.router', 
+        'ngMessages', 
+        'restangular'
+    ]);
 })();

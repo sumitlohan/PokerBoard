@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-    app.controller('signupCtrl', [
+    angular.module('pokerPlanner').controller('signupCtrl', [
         '$scope', 
         '$state', 
         'signupService',
@@ -13,6 +13,7 @@
     
             $scope.errorEmail = false;
     
+
             $scope.signup = function() {
               user = {
                 firstName: $scope.firstName,
@@ -34,22 +35,22 @@
               // go to login
             };
     }]);
-})();
 
-
-app.directive('matchPass', function() {
-  return {
-    require: 'ngModel',
-    scope: {
-      confirmPassword: '=matchPass'
-    },
-    link: function (scope, element, attributes, paramval) {
-      paramval.$validators.matchPass = function(val) {
-        return val == scope.confirmPassword;
+    angular.module('pokerPlanner').directive('matchPass', function() {
+      return {
+        require: 'ngModel',
+        scope: {
+          confirmPassword: '=matchPass'
+        },
+        link: function (scope, element, attributes, paramval) {
+          paramval.$validators.matchPass = function(val) {
+            return val == scope.confirmPassword;
+          };
+          scope.$watch("confirmPassword", function() {
+            paramval.$validate();
+          });
+        }
       };
-      scope.$watch("confirmPassword", function() {
-        paramval.$validate();
-      });
-    }
-  };
-});
+    });
+    
+})();

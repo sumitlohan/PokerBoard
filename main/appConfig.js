@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-    pokerPlanner.config( [
+    angular.module("pokerPlanner").config( [
     '$stateProvider', 
     'RestangularProvider',
 
@@ -19,6 +19,6 @@
 
         var base_url = 'http://127.0.0.1:8000/api';
         RestangularProvider.setBaseUrl(base_url);
-        }
+        }   
     ]);
 })();

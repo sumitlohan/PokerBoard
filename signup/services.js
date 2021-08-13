@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-    app.service('signupService', [
+    angular.module("pokerPlanner").service('signupService', [
         'Restangular', 
         
         function(
