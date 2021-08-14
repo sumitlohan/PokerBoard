@@ -6,8 +6,8 @@
         function(
             Restangular
         ) {
-            this.createUser = function(data) {
-                // service logic
+            this.createUser = function(user) {
+                return Restangular.all('account/api/register').post(user);
             };
     }]); 
 })();

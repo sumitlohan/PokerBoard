@@ -3,10 +3,12 @@
     angular.module("pokerPlanner").config( [
     '$stateProvider', 
     'RestangularProvider',
+    'config',
 
     function (
         $stateProvider, 
-        RestangularProvider
+        RestangularProvider,
+        config,
     ) {
         var signupState = {
             name: 'signup',
@@ -17,8 +19,7 @@
 
         $stateProvider.state(signupState);
 
-        var base_url = 'http://127.0.0.1:8000/api';
-        RestangularProvider.setBaseUrl(base_url);
+        RestangularProvider.setBaseUrl(config.BASE_URL);
         }   
     ]);
 })();

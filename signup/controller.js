@@ -2,35 +2,36 @@
 (function () {
     angular.module('pokerPlanner').controller('signupCtrl', [
         '$scope', 
-        '$state', 
+        '$state',
+        '$cookies',
         'signupService',
     
         function(
           $scope, 
           $state,  
-          signupService
+          $cookies,
+          signupService,
         ) {
-    
-            $scope.isEmailError = false;
-            $scope.isError = false;
-            $scope.errorMsg = "";
+            $scope.isEmail = "";
+            $scope.isEmailError = function() {
+              return ($scope.isEmail === $scope.email);
+            };
 
             $scope.signup = function() {
-              user = {
-                firstName: $scope.firstName,
-                lastName: $scope.lastName,
+              const user = {
+                first_name: $scope.firstName,
+                last_name: $scope.lastName,
                 email: $scope.email,
                 password: $scope.password,
               }
     
               signupService.createUser(user).then(function(response) {
-                // go to login
+                $cookies.put('access_token', response.token.access)
+                $cookies.put('refresh_token', response.token.refresh);
+                // go to dashboard
               }, function(error) {
-                if(error.data.errors.email === "is already taken.") {
-                  $scope.isEmailError = true;
-                } else {
-                  $scope.isError = true;
-                  $scope.errorMsg = error;
+                if(error.data.email[0] === "user with this email already exists.") {
+                  $scope.isEmail = $scope.email;
                 }
               })
             };
