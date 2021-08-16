@@ -16,7 +16,6 @@
             $scope.showError = false;
 
             $scope.isEmailError = function() {
-              console.log("email");
               if($scope.existingEmail === $scope.email)
                 $scope.showError = true;
               else

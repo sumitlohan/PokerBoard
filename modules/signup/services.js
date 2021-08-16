@@ -2,14 +2,14 @@
 (function () {
     angular.module("pokerPlanner").service('signupService', [
         'Restangular', 
-        'config',
+        'APP_CONSTANTS',
         
         function(
             Restangular,
-            config
+            APP_CONSTANTS
         ) {
             this.createUser = function(user) {
-                return Restangular.all(config.signup).post(user);
+                return Restangular.all(APP_CONSTANTS.SIGNUP).post(user);
             };
     }]); 
 })();
