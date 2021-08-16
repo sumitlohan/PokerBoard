@@ -19,11 +19,11 @@
         </div>
         <div class="form-group signup-field">
             <label>Email<span class="text-danger">*</span></label>
-            <input type="email" name="email" ng-model="email" class="form-control" placeholder="Enter email address" required>
+            <input type="email" name="email" ng-change="isEmailError()" ng-model="email" class="form-control" placeholder="Enter email address" required>
             <div ng-messages="signupForm.email.$error" class="invalid" role="alert">
                 <span ng-show="signupForm.email.$touched" ng-message="required">Email is required!</span>
                 <span ng-message="email">Not a valid email address!</span>
-                <span ng-show="isEmailError()">Email already exists!</span>
+                <span ng-show="showError">Email already exists!</span>
             </div>
         </div>
         <div class="form-group signup-field">

@@ -10,11 +10,17 @@
           $scope, 
           $state,  
           $cookies,
-          signupService,
+          signupService
         ) {
-            $scope.isEmail = "";
+
+            $scope.showError = false;
+
             $scope.isEmailError = function() {
-              return ($scope.isEmail === $scope.email);
+              console.log("email");
+              if($scope.existingEmail === $scope.email)
+                $scope.showError = true;
+              else
+                $scope.showError = false;
             };
 
             $scope.signup = function() {
@@ -24,14 +30,15 @@
                 email: $scope.email,
                 password: $scope.password,
               }
-    
+
               signupService.createUser(user).then(function(response) {
                 $cookies.put('access_token', response.token.access)
                 $cookies.put('refresh_token', response.token.refresh);
                 // go to dashboard
               }, function(error) {
                 if(error.data.email[0] === "user with this email already exists.") {
-                  $scope.isEmail = $scope.email;
+                  $scope.existingEmail = $scope.email;
+                  $scope.isEmailError();
                 }
               })
             };

@@ -13,7 +13,7 @@
         var signupState = {
             name: 'signup',
             url: '/signup',
-            templateUrl: '../signup/signup.html',
+            templateUrl: '../modules/signup/signup.html',
             controller: 'signupCtrl'
         }
 
