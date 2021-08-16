@@ -1,5 +1,8 @@
 'use strict';
 (function () {
+    /**
+     * Controller for signup
+     */
     angular.module('pokerPlanner').controller('signupCtrl', [
         '$scope', 
         '$state',
@@ -15,6 +18,9 @@
 
             $scope.showError = false;
 
+            /**
+             * Checks if email already exists
+             */ 
             $scope.isEmailError = function() {
               if($scope.existingEmail === $scope.email)
                 $scope.showError = true;
