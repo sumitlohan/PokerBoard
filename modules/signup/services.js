@@ -12,7 +12,7 @@
             APP_CONSTANTS
         ) {
             this.createUser = function(user) {
-                return Restangular.all(APP_CONSTANTS.SIGNUP).post(user);
+                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.SIGNUP).post(user);
             };
     }]); 
 })();

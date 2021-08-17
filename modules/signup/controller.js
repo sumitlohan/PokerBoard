@@ -8,12 +8,14 @@
         '$state',
         '$cookies',
         'signupService',
+        'APP_CONSTANTS',
     
         function(
-          $scope, 
-          $state,  
-          $cookies,
-          signupService
+            $scope, 
+            $state,  
+            $cookies,
+            signupService,
+            APP_CONSTANTS
         ) {
 
             $scope.showError = false;
@@ -21,36 +23,34 @@
             /**
              * Checks if email already exists
              */ 
-            $scope.isEmailError = function() {
-              if($scope.existingEmail === $scope.email)
-                $scope.showError = true;
-              else
-                $scope.showError = false;
+            $scope.isEmailError = () => {
+                if($scope.existingEmail === $scope.email)
+                    $scope.showError = true;
+                else
+                    $scope.showError = false;
             };
 
             $scope.signup = function() {
-              const user = {
-                first_name: $scope.firstName,
-                last_name: $scope.lastName,
-                email: $scope.email,
-                password: $scope.password,
-              }
-
-              signupService.createUser(user).then(function(response) {
-                $cookies.put('access_token', response.token.access)
-                $cookies.put('refresh_token', response.token.refresh);
-                // go to dashboard
-              }, function(error) {
-                if(error.data.email[0] === "user with this email already exists.") {
-                  $scope.existingEmail = $scope.email;
-                  $scope.isEmailError();
+                const user = {
+                    first_name: $scope.firstName,
+                    last_name: $scope.lastName,
+                    email: $scope.email,
+                    password: $scope.password
                 }
-              })
+
+                signupService.createUser(user).then(function(response) {
+                    $cookies.put('token', response.token);
+                    // go to dashboard
+                }, function(error) {
+                    if(error.data.email[0] === APP_CONSTANTS.ERRORS.EMAIL) {
+                        $scope.existingEmail = $scope.email;
+                        $scope.isEmailError();
+                    }
+                })
             };
     
             $scope.goToLogin = function() {
               // go to login
             };
     }]);
-    
 })();

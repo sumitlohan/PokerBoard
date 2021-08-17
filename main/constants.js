@@ -1,7 +1,12 @@
 "use strict";
 (function () {
-  angular.module("pokerPlanner").constant("APP_CONSTANTS", {
-    BASE_URL: config.BASE_URL,
-    SIGNUP: 'account/api/register',
-  });
+    angular.module("pokerPlanner").constant("APP_CONSTANTS", {
+        BASE_URL: config.BASE_URL,
+        API_ENDPOINT: {
+            SIGNUP: 'api/accounts/register',
+        },
+        ERRORS: {
+            EMAIL: 'user with this email already exists.',
+        },
+    });
 })();
