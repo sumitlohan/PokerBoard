@@ -5,11 +5,29 @@
 
 .white-back{
     background-color: #fff;
+    border-radius: 10px;
     padding: 40px;
 }
 
 .grey-back{
     background-color: rgb(245, 245, 245);
+}
+
+.required:after {
+    content:" *";
+    color: red;
+}
+
+.redirect-extras{
+    font-size: 12px;
+    cursor: pointer;
+    color: blue;
+    margin-left: 15px;
+    padding-top: 5px;
+}
+
+.f-12{
+    font-size: 12px;
 }
 
 
