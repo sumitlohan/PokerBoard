@@ -2,7 +2,6 @@
     <form class="signup-form" name="signupForm">
         <h2 class="mt-4 mb-4">Signup</h2>
         <h3>Please enter the details</h3>
-        <h4 ng-show="isError" class="text-danger mt-3">{{errorMsg}}</h4>
         <div class="form-group signup-field">
             <h6 class="text-danger mt-3 mb-3">* indicates required</h6>
             <label>First Name<span class="text-danger">*</span></label>
@@ -12,16 +11,19 @@
             </div>
         </div>
         <div class="form-group signup-field">
-            <label>Last Name</label>
-            <input type="text" name="lastName" ng-model="lastName" class="form-control" placeholder="Enter last name">
+            <label>Last Name<span class="text-danger">*</span></label>
+            <input type="text" name="lastName" ng-model="lastName" class="form-control" placeholder="Enter last name" required>
+            <div ng-messages="signupForm.firstName.$error" class="invalid" role="alert">
+                <span ng-show="signupForm.firstName.$touched" ng-message="required">First name is required!</span>
+            </div>
         </div>
         <div class="form-group signup-field">
             <label>Email<span class="text-danger">*</span></label>
-            <input type="email" name="email" ng-model="email" class="form-control" placeholder="Enter email address" required>
+            <input type="email" name="email" ng-change="isEmailError()" ng-model="email" class="form-control" placeholder="Enter email address" required>
             <div ng-messages="signupForm.email.$error" class="invalid" role="alert">
                 <span ng-show="signupForm.email.$touched" ng-message="required">Email is required!</span>
                 <span ng-message="email">Not a valid email address!</span>
-                <span ng-show="isEmailError">Email already exists!</span>
+                <span ng-show="showError">Email already exists!</span>
             </div>
         </div>
         <div class="form-group signup-field">

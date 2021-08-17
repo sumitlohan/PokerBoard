@@ -3,6 +3,7 @@
     angular.module("pokerPlanner", [
         'ui.router', 
         'ngMessages', 
-        'restangular'
+        'restangular',
+        'ngCookies'
     ]);
 })();
