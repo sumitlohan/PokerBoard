@@ -3,12 +3,12 @@
     angular.module("pokerPlanner").config( [
     '$stateProvider', 
     'RestangularProvider',
-    'config',
+    'APP_CONSTANTS',
 
     function (
         $stateProvider, 
         RestangularProvider,
-        config,
+        APP_CONSTANTS,
     ) {
         var signupState = {
             name: 'signup',
@@ -27,7 +27,7 @@
         $stateProvider.state(signupState);
         $stateProvider.state(loginState);
 
-        RestangularProvider.setBaseUrl(config.BASE_URL);
+        RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);
         }   
     ]);
 })();

@@ -1,5 +1,8 @@
 'use strict';
 (function () {
+    /**
+     * Checks if password matches confirm password
+     */
     angular.module('pokerPlanner').directive('matchPass', function() {
         return {
           require: 'ngModel',
