@@ -18,7 +18,6 @@
         $scope.errorMsg = "This is a sample error";
       };
 
-      $scope.onSubmit = function (form) {
         if (form.$valid) {
           loginService.getUser({ email: $scope.email, password: $scope.password })
             .then(function (response) {
@@ -34,8 +33,6 @@
               $scope.errorMsg = "Invalid Email or Password"
             });
         }
-      };
-
-    }]);
-
-})();
+      }
+  ]);
+}) ()
