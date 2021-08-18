@@ -30,7 +30,7 @@
                     $scope.showError = false;
             };
 
-            $scope.signup = function() {
+            $scope.signup = () => {
                 const user = {
                     first_name: $scope.firstName,
                     last_name: $scope.lastName,
@@ -42,7 +42,7 @@
                     $cookies.put('token', response.token);
                     // go to dashboard
                 }, function(error) {
-                    if(error.data.email[0] === APP_CONSTANTS.ERRORS.EMAIL) {
+                    if(error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
                         $scope.existingEmail = $scope.email;
                         $scope.isEmailError();
                     }
