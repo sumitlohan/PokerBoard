@@ -2,16 +2,24 @@
 (function () {
     angular.module('pokerPlanner').controller('loginCtrl', [
         '$scope',
+        '$rootScope',
         '$state',
         '$cookies',
         'loginService',
 
         function (
           $scope,
+          $rootScope,
           $state,
           $cookies,
           loginService
         ) {
+
+            if ($cookies.get('token')) {
+                $rootScope.isAuth = true;
+                $state.go('pokerboard')
+            }
+
             $scope.redirect = function () {
                 $state.go('signup');
             };
@@ -25,7 +33,7 @@
                     $cookies.put('last_name', response.last_name);
                     $cookies.put('email', response.email);
                 
-                    // goto dashboard
+                    $state.go('pokerboard')
                 }, function (error) {
                     $scope.errorStatus = true;
                     $scope.errorMsg = "Invalid Email or Password"

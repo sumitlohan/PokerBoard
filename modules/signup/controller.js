@@ -5,6 +5,7 @@
      */
     angular.module('pokerPlanner').controller('signupCtrl', [
         '$scope', 
+        '$rootScope',
         '$state',
         '$cookies',
         'signupService',
@@ -12,6 +13,7 @@
     
         function(
             $scope, 
+            $rootScope,
             $state,  
             $cookies,
             signupService,
@@ -19,6 +21,11 @@
         ) {
 
             $scope.showError = false;
+
+            if ($cookies.get('token')) {
+                $rootScope.isAuth = true;
+                $state.go('pokerboard');
+            }
 
             /**
              * Checks if email already exists
@@ -40,7 +47,11 @@
 
                 signupService.createUser(user).then(function(response) {
                     $cookies.put('token', response.token);
-                    // go to dashboard
+                    $cookies.put('first_name', response.first_name);
+                    $cookies.put('last_name', response.last_name);
+                    $cookies.put('email', response.email);
+                    
+                    $state.go('pokerboard')
                 }, function(error) {
                     if(error.data.email[0] === APP_CONSTANTS.ERRORS.EMAIL) {
                         $scope.existingEmail = $scope.email;

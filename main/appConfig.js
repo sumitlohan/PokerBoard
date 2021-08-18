@@ -21,6 +21,12 @@
                     url: '/login',
                     templateUrl: 'modules/login/login.html',
                     controller: 'loginCtrl'
+                })
+
+                .state('pokerboard', {
+                    url: '/',
+                    templateUrl: 'modules/pokerboard/pokerboard.html',
+                    controller: 'pokerboardCtrl'
                 });
 
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);
