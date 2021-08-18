@@ -19,7 +19,7 @@
 
                 .state('login', {
                     url: '/login',
-                    templateUrl: '../modules/login/login.html',
+                    templateUrl: 'modules/login/login.html',
                     controller: 'loginCtrl'
                 });
 

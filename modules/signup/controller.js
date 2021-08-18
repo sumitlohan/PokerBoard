@@ -50,7 +50,7 @@
             };
     
             $scope.goToLogin = function() {
-              // go to login
+                $state.go('login');
             };
     }]);
 })();
