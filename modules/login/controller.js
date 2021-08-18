@@ -23,9 +23,11 @@
           loginService.getUser({ email: $scope.email, password: $scope.password })
             .then(function (response) {
               $scope.errorStatus = false;
-              $cookies.put('access_token', response.token.access);
-              $cookies.put('refresh_token', response.token.refresh);
-              console.log(response);
+              $cookies.put('token', response.token);
+              $cookies.put('first_name', response.first_name);
+              $cookies.put('last_name', response.last_name);
+              $cookies.put('email', response.email);
+              
               // goto dashboard
             }, function (error) {
               $scope.errorStatus = true;

@@ -12,7 +12,7 @@
             APP_CONSTANTS
         ) {
             this.getUser = function(user) {
-                return Restangular.all(APP_CONSTANTS.LOGIN).post(user);
+                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.LOGIN).post(user);
             };
     }]); 
 })();
