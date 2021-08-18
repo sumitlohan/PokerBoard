@@ -4,18 +4,10 @@
      * Controller for signup
      */
     angular.module('pokerPlanner').controller('signupCtrl', [
-        '$scope', 
-        '$state',
-        '$cookies',
-        'signupService',
-        'APP_CONSTANTS',
-    
+        '$scope', '$state', '$cookies', 'signupService', 'APP_CONSTANTS',
+
         function(
-            $scope, 
-            $state,  
-            $cookies,
-            signupService,
-            APP_CONSTANTS
+            $scope, $state, $cookies, signupService, APP_CONSTANTS
         ) {
 
             $scope.showError = false;
@@ -38,18 +30,22 @@
                     password: $scope.password
                 }
 
-                signupService.createUser(user).then(function(response) {
+                signupService.createUser(user).then(response => {
                     $cookies.put('token', response.token);
                     // go to dashboard
-                }, function(error) {
-                    if(error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
+                }, error => {
+                    if(error.status === 404)
+                        $state.go('404-page-not-found');
+                    else if(error.status === 500)
+                        $state.go('500-internal-server-error');
+                    else if(error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
                         $scope.existingEmail = $scope.email;
                         $scope.isEmailError();
                     }
                 })
             };
     
-            $scope.goToLogin = function() {
+            $scope.goToLogin = () => {
               // go to login
             };
     }]);
