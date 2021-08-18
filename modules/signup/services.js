@@ -11,7 +11,7 @@
             Restangular,
             APP_CONSTANTS
         ) {
-            this.createUser = function(user) {
+            this.createUser = (user) => {
                 return Restangular.all(APP_CONSTANTS.API_ENDPOINT.SIGNUP).post(user);
             };
     }]); 
