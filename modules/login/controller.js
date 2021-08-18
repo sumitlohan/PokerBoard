@@ -12,7 +12,7 @@
           $cookies,
           loginService
         ) {
-            $scope.redirect = function () {
+            $scope.redirect = () => {
                 $state.go('signup');
             };
 
