@@ -6,7 +6,7 @@
             SIGNUP: 'api/accounts/register',
             LOGIN: 'api/accounts/login',
         },
-        ERRORS: {
+        ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',
         },
     });

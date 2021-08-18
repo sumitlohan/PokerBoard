@@ -20,7 +20,8 @@
                 $state.go('pokerboard')
             }
 
-            $scope.redirect = function () {
+            
+            $scope.redirect = () => {
                 $state.go('signup');
             };
 

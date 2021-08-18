@@ -11,7 +11,7 @@
             Restangular,
             APP_CONSTANTS
         ) {
-            this.getUser = function(user) {
+            this.getUser = (user) => {
                 return Restangular.all(APP_CONSTANTS.API_ENDPOINT.LOGIN).post(user);
             };
     }]); 
