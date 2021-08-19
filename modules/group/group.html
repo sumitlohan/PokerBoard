@@ -1,7 +1,7 @@
 <div  class="m-2">
     <div class=" m-2 d-flex justify-content-between">
         <h2>{{group.name}}</h2>
-        <button data-bs-toggle="modal" data-bs-target="#exampleModal" ng-show="true" class="btn btn-success">Add member</button>
+        <button data-bs-toggle="modal" data-bs-target="#exampleModal" ng-show="user.id==group.created_by" class="btn btn-success">Add member</button>
     </div>
 
     <!-- Modal -->
@@ -13,11 +13,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input ng-model="addEmail" name="email">
+                <input ng-model="addEmail" type="email">
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" ng-click="addMember()" class="btn btn-primary">Add</button>
+            <button type="button" ng-click="addMember()" data-bs-dismiss="modal" class="btn btn-primary">Add</button>
             </div>
         </div>
         </div>
@@ -25,10 +25,10 @@
     <ul class="">
       
         <li class="card" ng-repeat="member in group.members">
-          <div class="card-body d-flex align-center justify-content-around">
-            <p>{{member.user.first_name}} {{member.user.last_name}}</p>
-            <p class="text-secondary mx-2">{{member.user.email}}</p>
-            <button disabled ng-show="true" class="btn btn-danger">Remove</button>
+          <div class="card-body row">
+            <p class="col-4">{{member.user.first_name}} {{member.user.last_name}}</p>
+            <p class=" col-4 text-secondary mx-2">{{member.user.email}}</p>
+            <button disabled ng-show="user.id==group.created_by" class="btn btn-danger">Remove</button>
 
           </div>
         </li>

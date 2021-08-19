@@ -17,8 +17,11 @@
                 return allGroups.get();
             };
             this.addMember = function (email, groupId) {
-                const addMemberObj = Restangular.all(`${APP_CONSTANTS.API_ENDPOINT.GROUPS}${groupId}/create-members`);
-                return addMemberObj.post({email: email});
+                const user = {
+                    email: email
+                }
+                // const addMemberObj = Restangular.all(`${APP_CONSTANTS.API_ENDPOINT.GROUPS}${groupId}/create-members`);
+                return Restangular.all(`${APP_CONSTANTS.API_ENDPOINT.GROUPS}${groupId}/create-members`).post(user);
             }
     }]); 
 })();
