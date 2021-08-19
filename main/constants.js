@@ -5,6 +5,7 @@
         API_ENDPOINT: {
             SIGNUP: 'api/accounts/register',
             LOGIN: 'api/accounts/login',
+            GROUPS: 'groups/',
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',

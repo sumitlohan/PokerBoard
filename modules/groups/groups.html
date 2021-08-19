@@ -1,0 +1,12 @@
+<div class="m-2">
+  <h1>Groups</h1>
+  <ul class="">
+      
+    <li class="card" ng-repeat="group in groups">
+      <div class="card-body d-flex justify-content-between">
+        {{group.name}}
+        <a href="#!groups/{{group.id}}" class="btn btn-danger">View group</a>
+      </div>
+    </li>
+  </ul>
+</div>

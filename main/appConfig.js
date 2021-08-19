@@ -27,6 +27,16 @@
                     url: '/',
                     templateUrl: 'modules/pokerboard/pokerboard.html',
                     controller: 'pokerboardCtrl'
+                })
+                .state("groups", {
+                    url: "/groups",
+                    templateUrl: "modules/groups/groups.html",
+                    controller: "groupsCtrl",
+                })
+                .state("group", {
+                    url: "/groups/:id",
+                    templateUrl: "modules/group/group.html",
+                    controller: "groupCtrl",
                 });
 
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);
