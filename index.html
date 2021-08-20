@@ -2,18 +2,15 @@
 <html lang="en">
 
   <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/index.css" />
+    <link rel="stylesheet" href="modules/signup/signup.css" />
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/lodash/lodash.js"></script>
     <script src="node_modules/restangular/src/restangular.js"></script>
     <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
     <script src="node_modules/angular-messages/angular-messages.js"></script>
     <script src="node_modules/angular-cookies/angular-cookies.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/index.css" />
-    <link rel="stylesheet" href="modules/signup/signup.css" />
-  </head>
-
-  <body ng-app="pokerPlanner">
     <script src="env.js"></script>
     <script src="main/app.js"></script>
     <script src="main/appConfig.js"></script>
@@ -21,7 +18,9 @@
     <script src="modules/signup/controller.js"></script>
     <script src="modules/signup/services.js"></script>
     <script src="directives/matchPass.js"></script>
+  </head>
 
+  <body ng-app="pokerPlanner">
     <ui-view></ui-view>
   </body>
 
