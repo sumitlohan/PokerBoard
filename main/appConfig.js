@@ -1,16 +1,24 @@
 'use strict';
 (function () {
     angular.module("pokerPlanner").config([
-        '$stateProvider', 
-        'RestangularProvider',
+        '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 
         'APP_CONSTANTS',
 
         function (
-            $stateProvider, 
-            RestangularProvider,
+            $stateProvider, $urlRouterProvider, RestangularProvider, 
             APP_CONSTANTS,
         ) {
             $stateProvider
+                .state('404-page-not-found', {
+                    url: '/404-page-not-found',
+                    templateUrl: 'modules/error_templates/404-page-not-found.html'
+                })
+
+                .state('500-internal-server-error', {
+                    url: '/500-internal-server-error',
+                    templateUrl: 'modules/error_templates/500-internal-server-error.html'
+                })
+
                 .state('signup', {
                     url: '/signup',
                     templateUrl: 'modules/signup/signup.html',
@@ -23,6 +31,8 @@
                     controller: 'loginCtrl'
                 });
 
+            $urlRouterProvider.otherwise("/404-page-not-found");
+            
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);
         }   
     ]);
