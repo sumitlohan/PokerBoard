@@ -44,7 +44,7 @@
                 })
             };
     
-            $scope.goToLogin = function() {
+            $scope.goToLogin = () => {
                 $state.go('login');
             };
     }]);

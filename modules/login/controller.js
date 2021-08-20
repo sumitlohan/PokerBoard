@@ -12,21 +12,24 @@
 
             $scope.onSubmit = () => {
                 loginService.getUser({ email: $scope.email, password: $scope.password })
-                .then(function (response) {
+                .then(response => {
                     $scope.errorStatus = false;
-                    $cookies.put('token', response.token);
-                    $cookies.put('first_name', response.first_name);
-                    $cookies.put('last_name', response.last_name);
-                    $cookies.put('email', response.email);
+
+                    const user = {
+                        token: response.token,
+                        id: response.id,
+                        first_name: response.first_name,
+                        last_name: response.last_name,
+                        email: response.email
+                    }
+                    $cookies.put('user', JSON.stringify(user));
                 
                     // goto dashboard
-                }, function (error) {
+                }, error => {
                     $scope.errorStatus = true;
                     $scope.errorMsg = "Invalid Email or Password"
                 });
             }
-            
-            
         }
     ]);
 })()
