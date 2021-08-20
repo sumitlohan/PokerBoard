@@ -31,8 +31,7 @@
                 }
 
                 signupService.createUser(user).then(response => {
-                    $cookies.put('token', response.token);
-                    // go to dashboard
+                    $state.go('login');
                 }, error => {
                     if(error.status === 404)
                         $state.go('404-page-not-found');
