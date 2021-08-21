@@ -1,47 +1,38 @@
 'use strict';
 (function () {
     angular.module('pokerPlanner').controller('loginCtrl', [
-        '$scope',
-        '$rootScope',
-        '$state',
-        '$cookies',
-        'loginService',
+        '$scope', '$rootScope', '$state', '$cookies', 'loginService',
 
         function (
-          $scope,
-          $rootScope,
-          $state,
-          $cookies,
-          loginService
+          $scope, $rootScope, $state, $cookies, loginService
         ) {
 
-            if ($cookies.get('token')) {
-                $rootScope.isAuth = true;
-                $state.go('pokerboard')
-            }
+            if($rootScope.isAuth)
+                $state.go('pokerboard');
 
-            
-            $scope.redirect = () => {
+            $scope.redirectToSignup = () => {
                 $state.go('signup');
             };
 
             $scope.onSubmit = () => {
                 loginService.getUser({ email: $scope.email, password: $scope.password })
-                .then(function (response) {
+                .then(response => {
                     $scope.errorStatus = false;
-                    $cookies.put('token', response.token);
-                    $cookies.put('first_name', response.first_name);
-                    $cookies.put('last_name', response.last_name);
-                    $cookies.put('email', response.email);
-                
-                    $state.go('pokerboard')
-                }, function (error) {
+
+                    const user = {
+                        token: response.token,
+                        id: response.id,
+                        first_name: response.first_name,
+                        last_name: response.last_name,
+                        email: response.email
+                    }
+                    $cookies.put('user', JSON.stringify(user));
+                    $state.go('pokerboard');
+                }, error => {
                     $scope.errorStatus = true;
                     $scope.errorMsg = "Invalid Email or Password"
                 });
             }
-            
-            
         }
     ]);
 })()

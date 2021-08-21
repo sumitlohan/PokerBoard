@@ -1,27 +1,16 @@
 'use strict';
 (function () {
     angular.module('pokerPlanner').controller('pokerboardCtrl', [
-        '$scope',
-        '$rootScope',
-        '$state',
-        '$cookies',
-        'loginService',
+        '$scope', '$rootScope', '$state', '$cookies', 'loginService',
 
         function (
-          $scope,
-          $rootScope,
-          $state,
-          $cookies,
-          loginService
+          $scope, $rootScope, $state, $cookies, loginService
         ) {
-            if ($cookies.get('token')) {
-                $rootScope.isAuth = true;
-            } else {
-                $rootScope.isAuth = false;
+            if(!$rootScope.isAuth) {
                 $state.go('login');
             }
 
-            $rootScope.user = $cookies.get('first_name')
+            $rootScope.user = JSON.parse($cookies.get('user') || ('{}'));
         }
     ]);
 })()

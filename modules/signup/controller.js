@@ -4,28 +4,16 @@
      * Controller for signup
      */
     angular.module('pokerPlanner').controller('signupCtrl', [
-        '$scope', 
-        '$rootScope',
-        '$state',
-        '$cookies',
-        'signupService',
-        'APP_CONSTANTS',
-    
+        '$scope', '$rootScope', '$state', 'signupService', 'APP_CONSTANTS',
+
         function(
-            $scope, 
-            $rootScope,
-            $state,  
-            $cookies,
-            signupService,
-            APP_CONSTANTS
+            $scope, $rootScope, $state, signupService, APP_CONSTANTS
         ) {
 
             $scope.showError = false;
-
-            if ($cookies.get('token')) {
-                $rootScope.isAuth = true;
+            
+            if($rootScope.isAuth)
                 $state.go('pokerboard');
-            }
 
             /**
              * Checks if email already exists
@@ -45,22 +33,21 @@
                     password: $scope.password
                 }
 
-                signupService.createUser(user).then(function(response) {
-                    $cookies.put('token', response.token);
-                    $cookies.put('first_name', response.first_name);
-                    $cookies.put('last_name', response.last_name);
-                    $cookies.put('email', response.email);
-                    
-                    $state.go('pokerboard')
-                }, function(error) {
-                    if(error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
+                signupService.createUser(user).then(response => {
+                    $state.go('login');
+                }, error => {
+                    if(error.status === 404)
+                        $state.go('404-page-not-found');
+                    else if(error.status === 500)
+                        $state.go('500-internal-server-error');
+                    else if(error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
                         $scope.existingEmail = $scope.email;
                         $scope.isEmailError();
                     }
                 })
             };
     
-            $scope.goToLogin = function() {
+            $scope.goToLogin = () => {
                 $state.go('login');
             };
     }]);
