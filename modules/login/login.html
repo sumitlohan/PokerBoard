@@ -4,8 +4,8 @@
       <h3>Login</h3>
     </div>
     <div class="form-group mt-3">
-      <label class="required" for="exampleInputEmail1">Email address</label>
-      <input type="email" name="email" ng-model="email" class="form-control grey-back" id="exampleInputEmail1"
+      <label class="required" for="email">Email address</label>
+      <input type="email" name="email" ng-model="email" class="form-control grey-back" id="email"
         aria-describedby="emailHelp" required placeholder="Enter email">
       <div ng-messages="loginForm.email.$error" class="invalid mt-1" role="alert">
         <span ng-show="loginForm.email.$touched" ng-message="required">Email is required!</span>
@@ -13,9 +13,9 @@
       </div>
     </div>
     <div class="form-group mt-3">
-      <label class="required" for="exampleInputPassword1">Password</label>
+      <label class="required" for="password">Password</label>
       <input type="password" name="password" ng-model="password" class="form-control grey-back"
-        id="exampleInputPassword1" required placeholder="Password">
+        id="password" required placeholder="Password">
         <div ng-messages="loginForm.password.$error" class="invalid mt-1" role="alert">
           <span ng-show="loginForm.password.$touched" ng-message="required">Password is required!</span>
         </div>
@@ -25,7 +25,7 @@
     </div>
     <div class="d-flex mt-3">
       <button type="submit" class="btn btn-success">Submit</button>
-      <p class="redirect-extras" ng-click="redirect()">New User ?</p>
+      <p class="redirect-extras" ng-click="redirectToSignup()">New User ?</p>
     </div>
   </form>
 </div>

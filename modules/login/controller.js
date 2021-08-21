@@ -6,7 +6,8 @@
         function (
           $scope, $state, $cookies, loginService
         ) {
-            $scope.redirect = () => {
+        
+            $scope.redirectToSignup = () => {
                 $state.go('signup');
             };
 
