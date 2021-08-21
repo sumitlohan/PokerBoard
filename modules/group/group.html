@@ -23,12 +23,13 @@
         </div>
     </div>
     <ul class="">
-      
-        <li class="card" ng-repeat="member in group.members">
+        <li class="card my-2" ng-repeat="member in group.members">
           <div class="card-body row">
             <p class="col-4">{{member.user.first_name}} {{member.user.last_name}}</p>
-            <p class=" col-4 text-secondary mx-2">{{member.user.email}}</p>
-            <button disabled ng-show="user.id==group.created_by" class="btn btn-danger">Remove</button>
+            <p class=" col-4 text-secondary">{{member.user.email}}</p>
+            <div class="col-4">
+              <button disabled ng-show="user.id==group.created_by" class="btn btn-danger">Remove</button>
+            </div>
 
           </div>
         </li>

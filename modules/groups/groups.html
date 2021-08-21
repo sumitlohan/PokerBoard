@@ -12,15 +12,15 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <input ng-model="groupName" type="text">
+              <input ng-model="groupName" placeholder="Enter group name" type="text">
           </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" ng-click="createGroup()" class="btn btn-primary">Create</button>
+          <button type="button" ng-click="createGroup()" data-bs-dismiss="modal" class="btn btn-primary">Create</button>
           </div>
       </div>
       </div>
-  </div>
+    </div>
     <li class="card" ng-repeat="group in groups">
       <div class="card-body d-flex justify-content-between">
         {{group.name}}
