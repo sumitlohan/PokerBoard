@@ -2,12 +2,9 @@
 (function () {
   angular.module('pokerPlanner').controller('groupsCtrl', [
     '$scope',
-    '$state',
     'groupsService',
-
     function (
       $scope,
-      $state,
       groupsService,
     ) {
 

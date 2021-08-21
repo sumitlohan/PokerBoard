@@ -2,13 +2,10 @@
 (function () {
   angular.module('pokerPlanner').controller('groupCtrl', [
     '$scope',
-    '$state',
     '$stateParams',
     'groupService',
-
     function (
       $scope,
-      $state,
       $stateParams,
       groupService,
     ) {
@@ -32,6 +29,6 @@
             });
         }
         $scope.getGroup();
-      $scope.group = {id: 1, name: "G1"}
+        $scope.group = {};
     }]);
 })();

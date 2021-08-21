@@ -13,7 +13,13 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input ng-model="addEmail" type="email">
+              <form name="addMemberForm">
+                <input ng-model="addEmail" required name="email" placeholder="Enter email address" type="email">
+                <div ng-messages="addMemberForm.email.$error" class="invalid mt-1" role="alert">
+                  <span ng-show="addMemberForm.email.$touched" ng-message="required">Email is required!</span>
+                  <span ng-message="email">Not a valid email address!</span>
+              </div>
+              </form>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -30,7 +36,6 @@
             <div class="col-4">
               <button disabled ng-show="user.id==group.created_by" class="btn btn-danger">Remove</button>
             </div>
-
           </div>
         </li>
       </ul>

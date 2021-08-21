@@ -12,7 +12,14 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <input ng-model="groupName" placeholder="Enter group name" type="text">
+            <form name="createGroupForm">
+              <input ng-model="groupName" name="groupName" required placeholder="Enter group name" type="text" minlength="4" maxlength="20">
+              <div ng-messages="createGroupForm.groupName.$error" class="invalid mt-1" role="alert">
+                <span ng-show="createGroupForm.groupName.$touched" ng-message="required">Group name is required!</span>
+                <span ng-message="minlength">Minimum 4 characters required!</span>
+                <span ng-message="maxlength">Maximum 20 characters required!</span>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

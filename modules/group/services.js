@@ -1,8 +1,5 @@
 'use strict';
 (function () {
-    /**
-     * Returns details of user(first_name, last_name, id, email) and token(access, refresh))
-     */
     angular.module("pokerPlanner").service('groupService', [
         'Restangular', 
         'APP_CONSTANTS',
@@ -20,7 +17,6 @@
                 const user = {
                     email: email
                 }
-                // const addMemberObj = Restangular.all(`${APP_CONSTANTS.API_ENDPOINT.GROUPS}${groupId}/create-members`);
                 return Restangular.all(`${APP_CONSTANTS.API_ENDPOINT.GROUPS}${groupId}/create-members`).post(user);
             }
     }]); 
