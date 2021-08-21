@@ -1,0 +1,48 @@
+<div>
+    <form class="signup-form" name="signupForm">
+        <h2 class="mt-4 mb-4">Signup</h2>
+        <h3>Please enter the details</h3>
+        <div class="form-group signup-field">
+            <h6 class="text-danger mt-3 mb-3">* indicates required</h6>
+            <label>First Name<span class="text-danger">*</span></label>
+            <input type="text" name="firstName" ng-model="firstName" class="form-control" placeholder="Enter first name" required>
+            <div ng-messages="signupForm.firstName.$error" class="invalid" role="alert">
+                <span ng-show="signupForm.firstName.$touched" ng-message="required">First name is required!</span>
+            </div>
+        </div>
+        <div class="form-group signup-field">
+            <label>Last Name<span class="text-danger">*</span></label>
+            <input type="text" name="lastName" ng-model="lastName" class="form-control" placeholder="Enter last name" required>
+            <div ng-messages="signupForm.lastName.$error" class="invalid" role="alert">
+                <span ng-show="signupForm.lastName.$touched" ng-message="required">Last name is required!</span>
+            </div>
+        </div>
+        <div class="form-group signup-field">
+            <label>Email<span class="text-danger">*</span></label>
+            <input type="email" name="email" ng-change="isEmailError()" ng-model="email" class="form-control" placeholder="Enter email address" required>
+            <div ng-messages="signupForm.email.$error" class="invalid" role="alert">
+                <span ng-show="signupForm.email.$touched" ng-message="required">Email is required!</span>
+                <span ng-message="email">Not a valid email address!</span>
+                <span ng-show="showError">Email already exists!</span>
+            </div>
+        </div>
+        <div class="form-group signup-field">
+            <label>Password<span class="text-danger">*</span></label>
+            <input type="password" name="password" ng-model="password" class="form-control" placeholder="Enter password" minlength="8" required>
+            <div ng-messages="signupForm.password.$error" class="invalid" role="alert">
+                <span ng-show="signupForm.password.$touched" ng-message="required">Password is required!</span>
+                <span ng-message="minlength">Minimum 8 characters required!</span>
+            </div>
+        </div>  
+        <div class="form-group signup-field">
+            <label>Confirm Password<span class="text-danger">*</span></label>
+            <input type="password" name="confirmPassword" ng-model="confirmPassword" class="form-control" placeholder="Confirm password" required match-pass="password" >
+            <div ng-messages="signupForm.confirmPassword.$error" class="invalid" role="alert">
+                <span ng-show="signupForm.confirmPassword.$touched" ng-message="required">Confirm Password is required!</span> 
+                <span ng-show="signupForm.confirmPassword.$dirty" ng-message="matchPass">Passwords donot match!</span> 
+            </div>
+        </div> 
+        <button type="submit" ng-disabled="signupForm.$invalid" ng-click="signup()" class="btn btn-success mt-4 align-self-end">Submit</button>
+        <button class="btn btn-success mt-4 mb-4 align-self-end" ng-click="goToLogin()">Already SignedUp?</button>
+      </form>
+</div>

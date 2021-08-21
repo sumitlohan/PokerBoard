@@ -1,4 +1,6 @@
 'use strict';
 (function () {
-    angular.module("pokerPlanner", []);
+    angular.module("pokerPlanner", [
+        'ui.router', 'ngMessages', 'restangular', 'ngCookies'
+    ]);
 })();
