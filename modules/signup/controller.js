@@ -4,13 +4,16 @@
      * Controller for signup
      */
     angular.module('pokerPlanner').controller('signupCtrl', [
-        '$scope', '$state', '$cookies', 'signupService', 'APP_CONSTANTS',
+        '$scope', '$rootScope', '$state', 'signupService', 'APP_CONSTANTS',
 
         function(
-            $scope, $state, $cookies, signupService, APP_CONSTANTS
+            $scope, $rootScope, $state, signupService, APP_CONSTANTS
         ) {
 
             $scope.showError = false;
+            
+            if($rootScope.isAuth)
+                $state.go('pokerboard');
 
             /**
              * Checks if email already exists
@@ -44,7 +47,7 @@
                 })
             };
     
-            $scope.goToLogin = function() {
+            $scope.goToLogin = () => {
                 $state.go('login');
             };
     }]);

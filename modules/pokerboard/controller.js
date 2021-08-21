@@ -6,7 +6,11 @@
         function (
           $scope, $rootScope, $state, $cookies, loginService
         ) {
-            $rootScope.user = $cookies.get('first_name')
+            if(!$rootScope.isAuth) {
+                $state.go('login');
+            }
+
+            $rootScope.user = JSON.parse($cookies.get('user') || ('{}'));
         }
     ]);
 })()
