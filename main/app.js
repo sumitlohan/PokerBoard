@@ -17,9 +17,10 @@
             Restangular.setFullRequestInterceptor(( 
                 element, operation, route, url, headers, params, httpConfig
             ) => {
-                
-                if(token) {
-                    headers.Authorization = `Token ${token}`;
+                const userObj = JSON.parse($cookies.get('user') || ("{}"));
+                const authToken = userObj?.token; 
+                if(authToken) {
+                    headers.Authorization = `Token ${authToken}`;
                     $rootScope.isAuth = true;
                 }
 

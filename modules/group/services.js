@@ -1,13 +1,8 @@
 'use strict';
 (function () {
     angular.module("pokerPlanner").service('groupService', [
-        'Restangular', 
-        'APP_CONSTANTS',
-        
-        function(
-            Restangular,
-            APP_CONSTANTS
-        ) {
+        'Restangular', 'APP_CONSTANTS',
+        function(Restangular, APP_CONSTANTS) {
             this.getGroup = function(id) {
                 
                 const allGroups = Restangular.one(APP_CONSTANTS.API_ENDPOINT.GROUPS, id);
