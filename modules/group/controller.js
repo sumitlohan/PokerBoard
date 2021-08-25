@@ -5,24 +5,24 @@
         function ($scope, $stateParams, groupService) {
 			/*
 			 {
-                    "id": 28,
-                    "name": "abcd",
+                    "id": <int>,
+                    "name": "<string>",
                     "members": [
                         {
-                            "id": 71,
+                            "id": <int>,
                             "user": {
-                                "first_name": "user",
-                                "last_name": "user",
-                                "email": "user@gmail.com",
+                                "first_name": "<string>",
+                                "last_name": "<string>",
+                                "email": "<string>",
                             },
-                            "group": 28,
-                            "created_at": "2021-08-24T06:14:30.085900",
-                            "updated_at": "2021-08-24T06:14:30.086138"
+                            "group": <int>,
+                            "created_at": "<datetime>",
+                            "updated_at": "<datetime>"
                         },
                     ],
-                    "created_by": 17,
-                    "created_at": "2021-08-24T06:14:30.072120",
-                    "updated_at": "2021-08-24T06:14:30.072519"
+                    "created_by": <int>,
+                    "created_at": "<datetime>",
+                    "updated_at": "<datetime>"
                 },
 			 */
             const id = $stateParams.id;
