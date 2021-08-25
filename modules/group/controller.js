@@ -8,7 +8,7 @@
 
             $scope.addMember = function () {
                 groupService.addMember($scope.addEmail, $scope.group.id).then(response=>{
-                    $scope.getGroup();
+					$scope.group.members = [...$scope.group.members, {user: response.user}]
                 })
                 .catch(err=>{});
             }
