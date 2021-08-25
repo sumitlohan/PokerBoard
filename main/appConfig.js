@@ -43,7 +43,7 @@
                 })
                 .state("group", {
                     url: "/groups/:id",
-                    templateUrl: "modules/group/group.html",
+                    templateUrl: "modules/groups/group.html",
                     controller: "groupCtrl",
                 });
 
