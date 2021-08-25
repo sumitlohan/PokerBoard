@@ -4,7 +4,7 @@
         '$scope', 'groupListService',
         function ($scope, groupListService) {
             /*
-			Groups ->
+            Pattern of data that is to be stored in $scope.groups ->
             [
                 {
                     "id": <int>,
