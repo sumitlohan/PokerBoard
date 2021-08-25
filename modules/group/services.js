@@ -8,11 +8,12 @@
                 const allGroups = Restangular.one(APP_CONSTANTS.API_ENDPOINT.GROUPS, id);
                 return allGroups.get();
             };
-            this.addMember = function (email, groupId) {
+            this.addMember = function (email, group) {
                 const user = {
-                    email: email
+                    email: email,
+                    group
                 }
-                return Restangular.all(`${APP_CONSTANTS.API_ENDPOINT.GROUPS}${groupId}/create-members`).post(user);
+                return Restangular.all(`${APP_CONSTANTS.API_ENDPOINT.GROUPS}/create-members`).post(user);
             }
     }]); 
 })();

@@ -38,8 +38,8 @@
                 })
                 .state("groups", {
                     url: "/groups",
-                    templateUrl: "modules/groups/groups.html",
-                    controller: "groupsCtrl",
+                    templateUrl: "modules/groupList/groups.html",
+                    controller: "groupListCtrl",
                 })
                 .state("group", {
                     url: "/groups/:id",
