@@ -29,6 +29,12 @@
                     url: '/login',
                     templateUrl: 'modules/login/login.html',
                     controller: 'loginCtrl'
+                })
+
+                .state('email-verification', {
+                    url: '/activate/:uid/:token',
+                    templateUrl: 'modules/email_verification/email-verification.html',
+                    controller: 'emailCtrl'
                 });
 
             $urlRouterProvider.otherwise("/404-page-not-found");
