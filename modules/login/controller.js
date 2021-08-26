@@ -27,11 +27,7 @@
                     $cookies.put('user', JSON.stringify(user));
                     $state.go('pokerboard');
                 }, error => {
-                    if(error.status === 404)
-                        $state.go('404-page-not-found');
-                    else if(error.status === 500)
-                        $state.go('500-internal-server-error');
-                    else if(error.status === 400) {
+                    if(error.status === 400) {
                         $scope.errorStatus = true;
                         $scope.errorMsg = "Invalid Email or Password"
                     }

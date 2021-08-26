@@ -14,7 +14,7 @@
             if(token)   $rootScope.isAuth = true;
             else    $rootScope.isAuth = false;
 
-            //access when authenticated and not Authenticated
+            //access whether user is authenticated or not
             const publicRoutes = ['404-page-not-found', '500-internal-server-error'];
 
             //acess only when user is not authenticated
@@ -70,8 +70,10 @@
                 if(response.status === 401) {
                     if(current_url !== 'login' && current_url !== 'signup')
                         $state.go('login');
-                } else {
-                    // Some other unknown Error.
+                } else if(response.status === 404) {
+                    $state.go('404-page-not-found');
+                } else if(response.status === 500) {
+                    $state.go('500-internal-server-error');
                 }
                 // Stop the promise chain.
                 return true;

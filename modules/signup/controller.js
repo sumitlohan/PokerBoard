@@ -33,11 +33,7 @@
                 signupService.createUser(user).then(response => {
                     $state.go('login');
                 }, error => {
-                    if(error.status === 404)
-                        $state.go('404-page-not-found');
-                    else if(error.status === 500)
-                        $state.go('500-internal-server-error');
-                    else if(error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
+                    if(error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
                         $scope.existingEmail = $scope.email;
                         $scope.isEmailError();
                     }
