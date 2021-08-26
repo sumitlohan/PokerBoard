@@ -11,9 +11,6 @@
         ) {
 
             $scope.showError = false;
-            
-            if($rootScope.isAuth)
-                $state.go('pokerboard');
 
             /**
              * Checks if email already exists

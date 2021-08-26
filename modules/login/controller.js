@@ -7,9 +7,6 @@
           $scope, $rootScope, $state, $cookies, loginService
         ) {
 
-            if($rootScope.isAuth)
-                $state.go('pokerboard');
-
             $scope.redirectToSignup = () => {
                 $state.go('signup');
             };
@@ -26,11 +23,18 @@
                         last_name: response.last_name,
                         email: response.email
                     }
+                    $rootScope.isAuth = true;
                     $cookies.put('user', JSON.stringify(user));
                     $state.go('pokerboard');
                 }, error => {
-                    $scope.errorStatus = true;
-                    $scope.errorMsg = "Invalid Email or Password"
+                    if(error.status === 404)
+                        $state.go('404-page-not-found');
+                    else if(error.status === 500)
+                        $state.go('500-internal-server-error');
+                    else if(error.status === 400) {
+                        $scope.errorStatus = true;
+                        $scope.errorMsg = "Invalid Email or Password"
+                    }
                 });
             }
         }

@@ -5,7 +5,7 @@
             'ui.router', 'ngMessages', 'restangular', 'ngCookies'
         ])
         .run((
-            $rootScope, $state, $cookies, Restangular
+            $rootScope, $state, $cookies, $transitions, Restangular
         ) => {
 
             const user = JSON.parse($cookies.get('user') || ("{}"));
@@ -13,6 +13,32 @@
 
             if(token)   $rootScope.isAuth = true;
             else    $rootScope.isAuth = false;
+
+            //access when authenticated and not Authenticated
+            const publicRoutes = ['404-page-not-found', '500-internal-server-error'];
+
+            //acess only when user is not authenticated
+            const unauthRoutes = ['login', 'signup'];
+
+            //access only when user is authenticated
+            const authRoutes = ['pokerboard'];
+
+            $transitions.onBefore({ to: "*" }, function (transition) {
+                const curUrl = transition.from().name;
+                // console.log(curUrl);
+                if (!publicRoutes.find((route) => route === transition.to().name)) {
+                    if($rootScope.isAuth) {
+                        if(unauthRoutes.find((route) => route === transition.to().name))
+                            return transition.router.stateService.target(curUrl);
+                    } else {
+                        if(authRoutes.find((route) => route === transition.to().name))
+                            return transition.router.stateService.target('login');
+                        else if(!unauthRoutes.find((route) => route === transition.to().name))
+                            return transition.router.stateService.target('404-page-not-found');
+                    }
+                }
+            });
+            
             
             Restangular.setFullRequestInterceptor(( 
                 element, operation, route, url, headers, params, httpConfig
@@ -22,7 +48,6 @@
                     headers.Authorization = `Token ${token}`;
                     $rootScope.isAuth = true;
                 }
-
                 else {
                     const current_url = $state.current.name;
                     $rootScope.isAuth = false;
@@ -30,39 +55,17 @@
                         $state.go('login');
                     }
                 }
-                return {
-                    element: element,
-                    params: params,
-                    headers: headers,
-                    httpConfig: httpConfig,
-                };
+                return { element, params, headers, httpConfig };
             });
 
             Restangular.addResponseInterceptor((
                 data, operation, what, url, response, deferred
             ) => {
                 const current_url = $state.current.name;
-                if(current_url === 'signup') {
-                    if(response.status === 200) {
-                        $state.go('login');
-                    }
-                }
-                else if(current_url === 'login') {
-                    if(response.status === 200) {
-                        $rootScope.isAuth = true;
-                        $state.go('pokerbard');
-                    }
-                }
-                else {
-                    if(response.status === 200) {
-                        $state.go('pokerbard');
-                    }
-                }
                 return data;
             });
         
             Restangular.setErrorInterceptor(response => {
-                console.log(3);
                 const current_url = $state.current.name;
                 if(response.status === 401) {
                     if(current_url !== 'login' && current_url !== 'signup')
