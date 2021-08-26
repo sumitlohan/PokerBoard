@@ -12,11 +12,9 @@
             
             emailService.activateAccount($stateParams.uid, {'token': $stateParams.token})
                 .then(response => {
-                    $scope.statusMsg = response.token[0]
-                    console.log(response);
+                    $scope.statusMsg = response.token[0];
                 }, error => {
-                    $scope.statusMsg = 'Invalid email activation link'
-                    console.log(error);
+                    $scope.statusMsg = 'Invalid email activation link';
                 });
         }
     ]);
