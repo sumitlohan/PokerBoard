@@ -1,7 +1,7 @@
 'use strict';
 (function () {
     /**
-     * Returns details of user(first_name, last_name, id, email) and token(access, refresh))
+     * Returns details of user(first_name, last_name, id, email) and token
      */
     angular.module("pokerPlanner").service('loginService', [
         'Restangular', 'APP_CONSTANTS',
