@@ -2,7 +2,7 @@
 (function () {
     /**
      * Creates user and returns details of user(first_name, last_name, email) 
-     * and token
+     * and token(access, refresh))
      */
     angular.module("pokerPlanner").service('signupService', [
         'Restangular', 'APP_CONSTANTS',

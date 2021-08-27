@@ -7,6 +7,9 @@
           $scope, $rootScope, $state, $cookies, loginService
         ) {
 
+            if($rootScope.isAuth)
+                $state.go('pokerboard');
+
             $scope.redirectToSignup = () => {
                 $state.go('signup');
             };
@@ -23,14 +26,11 @@
                         last_name: response.last_name,
                         email: response.email
                     }
-                    $rootScope.isAuth = true;
                     $cookies.put('user', JSON.stringify(user));
                     $state.go('pokerboard');
                 }, error => {
-                    if(error.status === 400) {
-                        $scope.errorStatus = true;
-                        $scope.errorMsg = "Invalid Email or Password"
-                    }
+                    $scope.errorStatus = true;
+                    $scope.errorMsg = "Invalid Email or Password"
                 });
             }
         }
