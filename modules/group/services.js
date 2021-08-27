@@ -3,15 +3,25 @@
     angular.module("pokerPlanner").service('groupService', [
         'Restangular', 'APP_CONSTANTS',
         function(Restangular, APP_CONSTANTS) {
-            this.getGroup = function(id) {
-                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.GROUPS, id).get();
+            this.getGroupDetails = (groupId) => {
+                // get group details service
+                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.GROUPS, groupId).get();
             };
-            this.addMember = function (email, group) {
+            this.createMember = (email, group) => {
+                // create members in group service
                 const user = {
                     email,
                     group
                 }
-                return Restangular.all(`${APP_CONSTANTS.API_ENDPOINT.GROUPS}/create-members`).post(user);
+                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.CREATE_MEMBERS).post(user);
             }
+            this.createGroup = (group) => {
+                // create group service
+                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.GROUPS).post(group);
+            };
+            this.getGroups = () => {
+                // get group list service
+                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.GROUPS).getList();
+            };
     }]); 
 })();

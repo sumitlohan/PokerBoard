@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-    angular.module('pokerPlanner').controller('groupCtrl', [
+    angular.module('pokerPlanner').controller('groupDetailsCtrl', [
         '$scope', '$stateParams', 'groupService',
         function ($scope, $stateParams, groupService) {
             /*
@@ -27,21 +27,22 @@
                 },
              */
             $scope.group = {};
-            const id = $stateParams.id;
+            const groupId = $stateParams.id;
             $scope.addEmail = "";
 
-            $scope.addMember = function () {
-                groupService.addMember($scope.addEmail, $scope.group.id).then(response=>{
+            $scope.createMember = () => {
+                //create members in the group
+                groupService.createMember($scope.addEmail, $scope.group.id).then(response=>{
                     $scope.group.members = [...$scope.group.members, {user: response.user}]
-                })
-                .catch(err=>{});
+                }, err=>{});
             }
-            $scope.getGroup = function () {
-                groupService.getGroup(id).then(response=>{
+
+            $scope.getGroupDetails = () => {
+                // Get group details
+                groupService.getGroupDetails(groupId).then(response=>{
                     $scope.group = response;
-                })
-                .catch(err=>{});
+                }, err=>{});
             }
-            $scope.getGroup();
+            $scope.getGroupDetails();
         }]);
 })();

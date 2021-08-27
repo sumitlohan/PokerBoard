@@ -38,13 +38,13 @@
                 })
                 .state("groups", {
                     url: "/groups",
-                    templateUrl: "modules/groupList/groups.html",
+                    templateUrl: "modules/group/groupList.html",
                     controller: "groupListCtrl",
                 })
                 .state("group", {
                     url: "/groups/:id",
-                    templateUrl: "modules/group/group.html",
-                    controller: "groupCtrl",
+                    templateUrl: "modules/group/groupDetails.html",
+                    controller: "groupDetailsCtrl",
                 });
 
             $urlRouterProvider.otherwise("/404-page-not-found");

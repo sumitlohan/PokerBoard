@@ -1,8 +1,8 @@
 'use strict';
 (function () {
     angular.module('pokerPlanner').controller('groupListCtrl', [
-        '$scope', 'groupListService',
-        function ($scope, groupListService) {
+        '$scope', 'groupService',
+        function ($scope, groupService) {
             /*
             Pattern of data that is to be stored in $scope.groups ->
             [
@@ -30,18 +30,16 @@
             */
             $scope.groups = [];
             $scope.groupName = "";
-            $scope.createGroup = function () {
-                groupListService.createGroup({name: $scope.groupName}).then(response=>{
+            $scope.createGroup = () => {
+                groupService.createGroup({name: $scope.groupName}).then(response=>{
                     $scope.groups = [...$scope.groups, response];
-                })
-                .catch(err=>{})
+                }, err=>{})
             }
 
-            $scope.getGroups = function () {
-                groupListService.getGroups().then(response=>{
+            $scope.getGroups = () => {
+                groupService.getGroups().then(response=>{
                   $scope.groups = response;
-                })
-                .catch(err=>{})
+                }, err=>{})
             }
             $scope.getGroups();
         }]);
