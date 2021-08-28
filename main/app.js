@@ -2,80 +2,74 @@
 (function () {
     angular
         .module("pokerPlanner", [
-            'ui.router', 'ngMessages', 'restangular', 'ngCookies'
+            'ui.router', 'ngMessages', 'restangular', 'ngCookies', 'angularjsToast'
         ])
         .run((
-            $rootScope, $state, $cookies, $transitions, Restangular
+            $rootScope, $state, $cookies, $transitions, Restangular, APP_CONSTANTS
         ) => {
 
             const user = JSON.parse($cookies.get('user') || ("{}"));
-            const token = user?.token; 
             $rootScope.user = user;
-            if(token)   $rootScope.isAuth = true;
-            else    $rootScope.isAuth = false;
+            const token = user?.token; 
+            $rootScope.isAuth = token;
 
-            //access whether user is authenticated or not
-            const publicRoutes = ['404-page-not-found', '500-internal-server-error'];
-
-            //acess only when user is not authenticated
-            const unauthRoutes = ['login', 'signup'];
-
-            //access only when user is authenticated
-            const authRoutes = ['pokerboard'];
-
+            /**
+             * Executes before every transition
+             */
             $transitions.onBefore({ to: "*" }, function (transition) {
-                const curUrl = transition.from().name;
-                // console.log(curUrl);
-                if (!publicRoutes.find((route) => route === transition.to().name)) {
+                const currentUrl = transition.from().name;
+                if (!APP_CONSTANTS.ROUTES.PUBLIC_ROUTES.find((route) => route === transition.to().name)) {
                     if($rootScope.isAuth) {
-                        if(unauthRoutes.find((route) => route === transition.to().name))
-                            return transition.router.stateService.target(curUrl);
+                        if(APP_CONSTANTS.ROUTES.UNAUTH_ROUTES.find((route) => route === transition.to().name))
+                            return transition.router.stateService.target('pokerboard');
                     } else {
-                        if(authRoutes.find((route) => route === transition.to().name))
+                        if(APP_CONSTANTS.ROUTES.AUTH_ROUTES.find((route) => route === transition.to().name))
                             return transition.router.stateService.target('login');
-                        else if(!unauthRoutes.find((route) => route === transition.to().name))
+                        else if(!APP_CONSTANTS.ROUTES.UNAUTH_ROUTES.find((route) => route === transition.to().name))
                             return transition.router.stateService.target('404-page-not-found');
                     }
                 }
             });
             
-            
+            /**
+             * Executes at the time of request
+             */
             Restangular.setFullRequestInterceptor(( 
                 element, operation, route, url, headers, params, httpConfig
             ) => {
-                const userObj = JSON.parse($cookies.get('user') || ("{}"));
-                const authToken = userObj?.token; 
+                $rootScope.loading = true;
+                const authToken = JSON.parse($cookies.get('user') || ("{}")).token
                 if(authToken) {
                     headers.Authorization = `Token ${authToken}`;
-                    $rootScope.isAuth = true;
+                    $rootScope.isAuth = authToken;
                 }
                 else {
-                    const current_url = $state.current.name;
-                    $rootScope.isAuth = false;
-                    if(current_url !== 'login' && current_url !== 'signup') {
+                    const currentUrl = $state.current.name;
+                    $rootScope.isAuth = "";
+                    if(!(['login', 'signup'].includes(currentUrl))) {
                         $state.go('login');
                     }
                 }
                 return { element, params, headers, httpConfig };
             });
 
+            /**
+             * Executes if successful response is received
+             */
             Restangular.addResponseInterceptor((
                 data, operation, what, url, response, deferred
             ) => {
-                const current_url = $state.current.name;
+                $rootScope.loading = false;
                 return data;
             });
         
+            /**
+             * Executes if error is received
+             */
             Restangular.setErrorInterceptor(response => {
-                const current_url = $state.current.name;
-                if(response.status === 401) {
-                    if(current_url !== 'login' && current_url !== 'signup')
-                        $state.go('login');
-                } else if(response.status === 404) {
-                    $state.go('404-page-not-found');
-                } else if(response.status === 500) {
-                    $state.go('500-internal-server-error');
-                }
+                $rootScope.loading = false;
+                const key = response.status;
+                $state.go(APP_CONSTANTS.ERROR_ROUTES[key]);
                 // Stop the promise chain.
                 return true;
             });

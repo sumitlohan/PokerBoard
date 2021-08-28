@@ -23,12 +23,12 @@
                         last_name: response.last_name,
                         email: response.email
                     }
-                    $rootScope.isAuth = true;
+                    $rootScope.isAuth = response.token;
                     $cookies.put('user', JSON.stringify(user));
                     $state.go('pokerboard');
                 }, error => {
                     if(error.status === 400) {
-                        $scope.errorStatus = true;
+                        $scope.isError = true;
                         $scope.errorMsg = "Invalid Email or Password"
                     }
                 });
