@@ -3,12 +3,10 @@
     /**
      * Controller for signup
      */
-    angular.module('pokerPlanner').controller('signupCtrl', [
-        '$scope', '$rootScope', '$state', 'signupService', 'APP_CONSTANTS',
 
-        function(
-            $scope, $rootScope, $state, signupService, APP_CONSTANTS
-        ) {
+    angular.module('pokerPlanner').controller('signupCtrl', ['$scope', '$rootScope', '$state', 'signupService', 
+        'APP_CONSTANTS',
+        function ($scope, $rootScope, $state, signupService, APP_CONSTANTS) {
 
             $scope.showError = false;
 
@@ -16,10 +14,7 @@
              * Checks if email already exists
              */ 
             $scope.isEmailError = () => {
-                if($scope.existingEmail === $scope.email)
-                    $scope.showError = true;
-                else
-                    $scope.showError = false;
+                $scope.showError = ($scope.existingEmail === $scope.email);
             };
 
             $scope.signup = () => {
@@ -34,7 +29,7 @@
                     $rootScope.signedUp = true;
                     $state.go('login');
                 }, error => {
-                    if(error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
+                    if (error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
                         $scope.existingEmail = $scope.email;
                         $scope.isEmailError();
                     }

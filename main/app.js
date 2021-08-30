@@ -16,17 +16,16 @@
             /**
              * Executes before every transition
              */
-            $transitions.onBefore({ to: "*" }, function(transition) {
-                const currentUrl = transition.from().name;
+            $transitions.onBefore ({ to: "*" }, function (transition) {
                 if (!APP_CONSTANTS.ROUTES.PUBLIC_ROUTES.find((route) => route === transition.to().name)) {
                     if ($rootScope.isAuth) {
-                        if (APP_CONSTANTS.ROUTES.UNAUTH_ROUTES.find((route) => route === transition.to().name))
+                        if (APP_CONSTANTS.ROUTES.UNAUTH_ROUTES.find((route) => route === transition.to().name)) {
                             return transition.router.stateService.target('pokerboard');
+                        }
                     } else {
-                        if (APP_CONSTANTS.ROUTES.AUTH_ROUTES.find((route) => route === transition.to().name))
+                        if (APP_CONSTANTS.ROUTES.AUTH_ROUTES.find((route) => route === transition.to().name)) {
                             return transition.router.stateService.target('login');
-                        else if (!APP_CONSTANTS.ROUTES.UNAUTH_ROUTES.find((route) => route === transition.to().name))
-                            return transition.router.stateService.target('404-page-not-found');
+                        }  
                     }
                 }
             });
@@ -34,9 +33,7 @@
             /**
              * Executes at the time of request
              */
-            Restangular.setFullRequestInterceptor((
-                element, operation, route, url, headers, params, httpConfig
-            ) => {
+            Restangular.setFullRequestInterceptor ((element, operation, route, url, headers, params, httpConfig) => {
                 $rootScope.loading = true;
                 const authToken = JSON.parse($cookies.get('user') || ("{}")).token
                 if (authToken) {
@@ -55,9 +52,7 @@
             /**
              * Executes if successful response is received
              */
-            Restangular.addResponseInterceptor((
-                data, operation, what, url, response, deferred
-            ) => {
+            Restangular.addResponseInterceptor ((data, operation, what, url, response, deferred) => {
                 $rootScope.loading = false;
                 return data;
             });
@@ -65,7 +60,7 @@
             /**
              * Executes if error is received
              */
-            Restangular.setErrorInterceptor(response => {
+            Restangular.setErrorInterceptor (response => {
                 $rootScope.loading = false;
                 const key = response.status;
                 $state.go(APP_CONSTANTS.ERROR_ROUTES[key]);
