@@ -23,7 +23,7 @@
         
         return {
             link: nav,
-            templateUrl: 'modules/navbar/navbar.html'
+            templateUrl: 'directives/navbar/navbar.html'
         };
     });
 })();
