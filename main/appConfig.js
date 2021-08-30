@@ -33,8 +33,8 @@
 
                 .state('email-verification', {
                     url: '/activate/:uid/:token',
-                    templateUrl: 'modules/email_verification/email-verification.html',
-                    controller: 'emailCtrl'
+                    templateUrl: 'modules/emailVerification/email-verification.html',
+                    controller: 'emailVerificationCtrl'
                 });
 
             $urlRouterProvider.otherwise("/404-page-not-found");

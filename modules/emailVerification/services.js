@@ -3,7 +3,7 @@
     /**
      * Activate user account if the token is valid
      */
-    angular.module("pokerPlanner").service('emailService', [
+    angular.module("pokerPlanner").service('emailVerificationService', [
         'Restangular', 'APP_CONSTANTS',
         
         function(

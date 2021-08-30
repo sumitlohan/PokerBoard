@@ -1,16 +1,16 @@
 'use strict';
 (function () {
-    angular.module('pokerPlanner').controller('emailCtrl', [
-        '$scope', '$state', '$cookies', 'emailService', '$stateParams',
+    angular.module('pokerPlanner').controller('emailVerificationCtrl', [
+        '$scope', '$state', '$cookies', 'emailVerificationService', '$stateParams',
 
         function (
-            $scope, $state, $cookies, emailService, $stateParams
+            $scope, $state, $cookies, emailSeemailVerificationServicervice, $stateParams
         ) {
             $scope.goToLogin = () => {
                 $state.go('login');
             };
             
-            emailService.activateAccount($stateParams.uid, {'token': $stateParams.token})
+            emailVerificationService.activateAccount($stateParams.uid, {'token': $stateParams.token})
                 .then(response => {
                     $scope.statusMsg = 'Account activated successfully';
                 }, error => {
