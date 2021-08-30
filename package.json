@@ -23,9 +23,15 @@
     "angular": "^1.8.2",
     "angular-animate": "^1.8.2",
     "angular-cookies": "^1.8.2",
+    "angular-material": "^1.2.3",
     "angular-messages": "^1.8.2",
     "angular-sanitize": "^1.8.2",
+    "angularjs-dropdown-multiselect": "^2.0.0-beta.10",
     "angularjs-toast": "^4.0.1",
-    "restangular": "^1.6.1"
+    "bootstrap": "^5.1.0",
+    "bootstrap-select": "^1.13.18",
+    "chosen-js": "^1.8.7",
+    "restangular": "^1.6.1",
+    "ui-select": "^0.19.8"
   }
 }

@@ -35,6 +35,12 @@
                     url: '/',
                     templateUrl: 'modules/pokerboard/pokerboard.html',
                     controller: 'pokerboardCtrl'
+                })
+
+                .state('create-game', {
+                    url: '/create-game',
+                    templateUrl: 'modules/create-game/create-game.html',
+                    controller: 'createGameCtrl'
                 });
 
             $urlRouterProvider.otherwise("/404-page-not-found");

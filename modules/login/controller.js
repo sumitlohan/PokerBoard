@@ -15,7 +15,6 @@
                 loginService.getUser({ email: $scope.email, password: $scope.password })
                 .then(response => {
                     $scope.errorStatus = false;
-
                     const user = {
                         token: response.token,
                         id: response.id,
@@ -26,6 +25,7 @@
                     $rootScope.isAuth = response.token;
                     $cookies.put('user', JSON.stringify(user));
                     $state.go('pokerboard');
+
                 }, error => {
                     if(error.status === 400) {
                         $scope.isError = true;

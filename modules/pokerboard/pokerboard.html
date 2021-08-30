@@ -1,8 +1,24 @@
-<div class="d-flex justify-content-center">
-    <div class="d-flex flex-column bd-highlight">
-        <h1 class="pt-5 pb-5">Welcome, {{ user.first_name }}!</h1>
-        <h3 class="ml-5 pb-3 text-wrap">Go to "Pokerboard" to create a new one and/or vote in existing ones.</h3>
-        <h3 class="pb-3">Go to "Groups" to check existing ones and/or create a new one.</h3>
-        <h3 class="pb-3">Go to "Profile" to update your details.</h3>
+<div class="main-outer">
+    <h4 class="main-heading">Recent Planning Poker Games</h4>
+    <button ng-click="redirect()" class="new-btn bg-dark"><i class="ic-plus fa fa-plus"></i>New Game</button>
+    <div>
+        <div class="tab-head">
+            <p>TITLE</p>
+            <P>STATE</P>
+            <P>DATE</P>
+            <P>CREATOR</P>
+        </div>
+        <div class="hor-rule"></div>
+    </div>
+    <div ng-repeat="board in boardList">
+        <div class="tab-content">
+            <p>{{ board.title }}</p>
+            <P>{{ board.state }}</P>
+            <P>{{ board.date }}</P>
+            <P>{{ board.creator }}</P>
+            <button class="join-btn bg-dark">Join</button>
+            <button class="btn-delete bg-dark"><i class="fa fa-trash"></i></button>
+        </div>
+        <div class="hor-rule"></div>
     </div>
 </div>

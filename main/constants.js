@@ -5,9 +5,14 @@
         API_ENDPOINT: {
             SIGNUP: 'accounts/register',
             LOGIN: 'accounts/login',
+            POKERBOARD: 'pokerboards/',
+            SUGGESTIONS: 'pokerboards/suggestions',
+            JQL: 'pokerboards/jql',
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',
+            INVALID_JQL: 'Invalid JQL Query',
+            ATLEAST_TICKET: 'Please import atleast one ticket.'
         },
         ROUTES: {
             //access whether user is authenticated or not
