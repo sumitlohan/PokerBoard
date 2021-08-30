@@ -3,14 +3,14 @@
     /**
      * Checks if password matches confirm password
      */
-    angular.module('pokerPlanner').directive('matchPass', () => {
+    angular.module('pokerPlanner').directive('checkConfirmPass', () => {
         return {
             require: 'ngModel',
             scope: {
-                confirmPassword: '=matchPass'
+                confirmPassword: '=checkConfirmPass'
             },
             link: (scope, element, attributes, paramval) => {
-                paramval.$validators.matchPass = val => {
+                paramval.$validators.checkConfirmPass = val => {
                     return val == scope.confirmPassword;
                 };
                 scope.$watch("confirmPassword", () => {

@@ -1,11 +1,8 @@
 'use strict';
 (function () {
-    angular.module('pokerPlanner').controller('loginCtrl', [
-        '$scope', '$rootScope', '$state', '$cookies', 'loginService',
-
-        function (
-          $scope, $rootScope, $state, $cookies, loginService
-        ) {
+    angular.module('pokerPlanner').controller('loginCtrl', ['$scope', '$rootScope', '$state', '$cookies', 
+        'loginService',
+        function ($scope, $rootScope, $state, $cookies, loginService) {
 
             $scope.redirectToSignup = () => {
                 $state.go('signup');
