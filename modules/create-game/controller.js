@@ -6,7 +6,6 @@
         function (
             $scope, $rootScope, $state, $cookies, createGameService, $mdToast, APP_CONSTANTS, $window
         ) {
-            $rootScope.user = JSON.parse($cookies.get('user') || ('{}'));
             createGameService.getSuggestions().then(response => {
                 /* Import porjects and sprints from JIRA */
                 $scope.projectList = [];

@@ -6,7 +6,6 @@
         function (
             $scope, $rootScope, $state, $cookies, pokerboardService
         ) {
-            $rootScope.user = JSON.parse($cookies.get('user') || ('{}'));
             pokerboardService.getPokerboards().then(response => {
                 $scope.boardList = [];
                 response.forEach(parse);
