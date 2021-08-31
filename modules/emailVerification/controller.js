@@ -4,7 +4,7 @@
         '$scope', '$state', '$cookies', 'emailVerificationService', '$stateParams',
 
         function (
-            $scope, $state, $cookies, emailSeemailVerificationServicervice, $stateParams
+            $scope, $state, $cookies, emailVerificationService, $stateParams
         ) {
             $scope.goToLogin = () => {
                 $state.go('login');
