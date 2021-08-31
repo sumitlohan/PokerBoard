@@ -8,54 +8,56 @@
         ) {
             $rootScope.user = JSON.parse($cookies.get('user') || ('{}'));
             createGameService.getSuggestions().then(response => {
-                const pList = [];
-                const sList = [];
-                response.projects.forEach(parsePro);
-                response.sprints.forEach(parseSpr);
-
-                function parsePro(ele) {
-                    pList.push({
+                /* Import porjects and sprints from JIRA */
+                $scope.projectList = [];
+                $scope.sprintList = [];
+                response.projects.forEach(parseProjects);
+                response.sprints.forEach(parseSprints);
+                function parseProjects(ele) {
+                    $scope.projectList.push({
                         label: ele.displayName,
                         id: ele.value,
                     });
                 }
-
-                function parseSpr(ele) {
-                    sList.push({
+                function parseSprints(ele) {
+                    $scope.sprintList.push({
                         label: ele.name,
                         id: ele.id,
                     });
                 }
-                $scope.projectList = pList;
-                $scope.sprintList = sList;
-            }, error => {
-                console.log(error);
             });
 
             $scope.getSelectedProjects = function () {
-                $scope.selectedSprint = undefined;
+                /* Get the list of selected projects from the options */
+                if($scope.selectedProjects == undefined || $scope.selectedProjects.length == 0){
+                    $scope.ticketList = [];
+                    return;
+                }
+                /* Setting sprint to empty if user selects projects */
+                $scope.selectedSprint = [];
                 var proj = '';
                 for (let i = 0; i < $scope.selectedProjects.length; i++) {
                     proj += $scope.selectedProjects[i].id;
                     if (i != $scope.selectedProjects.length - 1) proj += ',';
                 }
                 const query = "project IN (" + proj + ")";
-                if (proj.length > 0) showTickets(query);
+                showTickets(query);
             };
 
             function showTickets(query) {
+                /* Show the list of JIRA tickets from selected projects/sprint/JQL */
                 createGameService.getTickets('?jql=' + query).then(response => {
-                    const tList = [];
-                    response.issues.forEach(parsePro);
-                    function parsePro(ele) {
-                        tList.push({
+                    $scope.ticketList = [];
+                    response.issues.forEach(parseTickets);
+                    function parseTickets(ele) {
+                        $scope.ticketList.push({
                             id: ele.id,
                             key: ele.key,
                             summary: ele.fields.summary,
                         });
                     }
-                    $scope.ticketList = tList;
                     $scope.jqlCustomQuery = query;
+                    /* Hiding the validation error if tickets have been imported */
                     if($scope.ticketList != undefined && $scope.ticketList.length > 0){
                         $scope.ticketErrorMsg = undefined;
                     }
@@ -65,13 +67,16 @@
                 });
             };
 
-            
-
-            $scope.getCustomQuery = function () {
+            $scope.executeCustomQuery = function () {
+                /* Get the JQL written in the query box */
+                /* Setting both pre-selected projects/sprint to empty if user executes custom JQL query */
+                $scope.selectedSprint = [];
+                $scope.selectedProjects = [];
                 showTickets($scope.jqlCustomQuery)
             };
 
             $scope.removeTicket = function (ticket) {
+                /* Remove the particular ticket from the list */
                 var i = $scope.ticketList.length;
                 while (i--) {
                     if ($scope.ticketList[i] && $scope.ticketList[i] === ticket) {
@@ -79,16 +84,20 @@
                     }
                 }
             };
-
+            
+            /* Setting default deck type */
             $scope.selectedType = "FIBONACCI";
 
             $scope.getSelectedSprint = function () {
+                /* Get the selected sprint from the options */
+                /* Setting pre-selected projects(if any) to empty if user selects sprint */
                 $scope.selectedProjects = [];
                 const query = "sprint IN (" + $scope.selectedSprint.id + ")";
                 showTickets(query);
             };
 
             $scope.submit = function () {
+                /* Creating the game from desired data */
                 const finalizedTickets = [];
                 if($scope.ticketList == undefined){
                     $scope.ticketErrorMsg = APP_CONSTANTS .ERROR_MESSAGES.ATLEAST_TICKET;
@@ -107,12 +116,10 @@
                     tickets: finalizedTickets
                 };
                 createGameService.createGame(data).then(response => {
-                    console.log(response);
                     /*
                     TODO: Goto estimation page
                     */
                 }, error => {
-                    console.log(error);
                     if ('title' in error.data){
                         $scope.nameErrorMsg = error.data.title[0];
                         $window.scrollTo(0, 0);
