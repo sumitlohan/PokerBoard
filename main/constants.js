@@ -21,9 +21,9 @@
             //access whether user is authenticated or not
             PUBLIC_ROUTES: ['404-page-not-found', '500-internal-server-error'],
             //acess only when user is not authenticated
-            UNAUTH_ROUTES: ['login', 'signup'],
+            UNAUTH_ROUTES: ['login', 'signup', 'email-verification'],
             //access only when user is authenticated
-            AUTH_ROUTES: ['pokerboard'],
+            AUTH_ROUTES: ['pokerboard', 'groups', 'group', 'create-game'],
         },
         ERROR_ROUTES: {
             404: '404-page-not-found',

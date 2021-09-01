@@ -2,6 +2,10 @@ body {
     background-color: #f1f1f1;
 }
 
+.back-univ{
+    background-color: #f1f1f1;
+}
+
 .loader {
     position: fixed;
     z-index: 99;

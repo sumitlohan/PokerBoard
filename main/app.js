@@ -13,6 +13,13 @@
             const token = user ?.token;
             $rootScope.isAuth = token;
 
+            $rootScope.logout = () =>{
+                $cookies.remove("user");
+                $rootScope.user = {};
+                $rootScope.isAuth = false;
+                $state.go("login");
+            }
+
             /**
              * Executes before every transition
              */
@@ -42,7 +49,7 @@
                 } else {
                     const currentUrl = $state.current.name;
                     $rootScope.isAuth = "";
-                    if (!(['login', 'signup'].includes(currentUrl))) {
+                    if (!(['login', 'signup', 'email-verification'].includes(currentUrl))) {
                         $state.go('login');
                     }
                 }
