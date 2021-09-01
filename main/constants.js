@@ -8,6 +8,7 @@
             POKERBOARD: 'pokerboards/',
             SUGGESTIONS: 'pokerboards/suggestions',
             JQL: 'pokerboards/jql',
+            ACCOUNT_ACTIVATE: 'accounts/activate/',
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',
