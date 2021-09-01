@@ -9,6 +9,8 @@
             SUGGESTIONS: 'pokerboards/suggestions',
             JQL: 'pokerboards/jql',
             ACCOUNT_ACTIVATE: 'accounts/activate/',
+            GROUPS: 'groups/',
+            CREATE_MEMBERS: 'groups/create-members',
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',

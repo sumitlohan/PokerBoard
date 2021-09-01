@@ -43,6 +43,18 @@
                     url: '/activate/:uid/:token',
                     templateUrl: 'modules/emailVerification/email-verification.html',
                     controller: 'emailVerificationCtrl'
+                })
+
+                .state("groups", {
+                    url: "/groups",
+                    templateUrl: "modules/group/groupList.html",
+                    controller: "groupListCtrl",
+                })
+                
+                .state("group", {
+                    url: "/groups/:id",
+                    templateUrl: "modules/group/groupDetails.html",
+                    controller: "groupDetailsCtrl",
                 });
 
             $urlRouterProvider.otherwise("/404-page-not-found");
