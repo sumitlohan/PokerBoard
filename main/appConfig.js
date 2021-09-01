@@ -55,6 +55,12 @@
                     url: "/groups/:id",
                     templateUrl: "modules/group/groupDetails.html",
                     controller: "groupDetailsCtrl",
+                })
+
+                .state('pokerboard-details', {
+                    url: "/pokerboard/:id",
+                    templateUrl: "modules/pokerboard/pokerboardDetails.html",
+                    controller: "pokerboardDetailsCtrl",
                 });
 
             $urlRouterProvider.otherwise("/404-page-not-found");

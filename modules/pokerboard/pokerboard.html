@@ -13,7 +13,7 @@
     </div>
     <div ng-repeat="board in boardList">
         <div class="tab-content">
-            <p>{{ board.title }}</p>
+            <p><a href="#!/pokerboard/{{board.id}}">{{ board.title }}</a></p>
             <P>{{ board.state }}</P>
             <P>{{ board.date }}</P>
             <P>{{ board.creator }}</P>
