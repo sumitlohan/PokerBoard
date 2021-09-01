@@ -39,7 +39,7 @@
                     proj += $scope.selectedProjects[i].id;
                     if (i != $scope.selectedProjects.length - 1) proj += ',';
                 }
-                const query = "project IN (" + proj + ")";
+                const query = `project IN (${proj})`;
                 showTickets(query);
             };
 

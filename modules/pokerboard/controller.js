@@ -11,6 +11,7 @@
                 response.forEach(parse);
                 function parse(ele) {
                     $scope.boardList.push({
+                        id: ele.id,
                         title: ele.title,
                         state: ele.status,
                         date: new Date(ele.created_at).toLocaleDateString(),

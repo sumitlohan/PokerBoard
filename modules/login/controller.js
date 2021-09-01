@@ -20,6 +20,7 @@
                         email: response.email
                     }
                     $rootScope.isAuth = response.token;
+                    $rootScope.user = user;
                     $cookies.put('user', JSON.stringify(user));
                     $state.go('pokerboard');
 
