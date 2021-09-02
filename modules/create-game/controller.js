@@ -6,29 +6,34 @@
         function (
             $scope, $rootScope, $state, $cookies, createGameService, $mdToast, APP_CONSTANTS, $window
         ) {
-            createGameService.getSuggestions().then(response => {
-                /* Import porjects and sprints from JIRA */
-                $scope.projectList = [];
-                $scope.sprintList = [];
-                response.projects.forEach(parseProjects);
-                response.sprints.forEach(parseSprints);
-                function parseProjects(ele) {
-                    $scope.projectList.push({
-                        label: ele.displayName,
-                        id: ele.value,
-                    });
-                }
-                function parseSprints(ele) {
-                    $scope.sprintList.push({
-                        label: ele.name,
-                        id: ele.id,
-                    });
-                }
-            });
+            init = function () {
+                /* Initializing function */
+                createGameService.getSuggestions().then(response => {
+                    /* Import porjects and sprints from JIRA */
+                    $scope.projectList = [];
+                    $scope.sprintList = [];
+                    response.projects.forEach(parseProjects);
+                    response.sprints.forEach(parseSprints);
+                    function parseProjects(ele) {
+                        $scope.projectList.push({
+                            label: ele.displayName,
+                            id: ele.value,
+                        });
+                    }
+                    function parseSprints(ele) {
+                        $scope.sprintList.push({
+                            label: ele.name,
+                            id: ele.id,
+                        });
+                    }
+                });
+            }
+            
+            init();
 
             $scope.getSelectedProjects = function () {
                 /* Get the list of selected projects from the options */
-                if($scope.selectedProjects == undefined || $scope.selectedProjects.length == 0){
+                if ($scope.selectedProjects == undefined || $scope.selectedProjects.length == 0) {
                     $scope.ticketList = [];
                     return;
                 }
@@ -57,7 +62,7 @@
                     }
                     $scope.jqlCustomQuery = query;
                     /* Hiding the validation error if tickets have been imported */
-                    if($scope.ticketList != undefined && $scope.ticketList.length > 0){
+                    if ($scope.ticketList != undefined && $scope.ticketList.length > 0) {
                         $scope.ticketErrorMsg = undefined;
                     }
                 }, error => {
@@ -83,7 +88,7 @@
                     }
                 }
             };
-            
+
             /* Setting default deck type */
             $scope.selectedType = "FIBONACCI";
 
@@ -98,10 +103,10 @@
             $scope.submit = function () {
                 /* Creating the game from desired data */
                 const finalizedTickets = [];
-                if($scope.ticketList == undefined){
-                    $scope.ticketErrorMsg = APP_CONSTANTS .ERROR_MESSAGES.ATLEAST_TICKET;
+                if ($scope.ticketList == undefined) {
+                    $scope.ticketErrorMsg = APP_CONSTANTS.ERROR_MESSAGES.ATLEAST_TICKET;
                     return;
-                }else{
+                } else {
                     $scope.ticketErrorMsg = undefined;
                 }
                 for (let i = 0; i < $scope.ticketList.length; i++) {
@@ -119,10 +124,10 @@
                     TODO: Goto estimation page
                     */
                 }, error => {
-                    if ('title' in error.data){
+                    if ('title' in error.data) {
                         $scope.nameErrorMsg = error.data.title[0];
                         $window.scrollTo(0, 0);
-                    }else{
+                    } else {
                         $scope.nameErrorMsg = undefined;
                     }
                 });
