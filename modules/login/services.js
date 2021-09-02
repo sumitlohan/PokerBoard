@@ -5,12 +5,9 @@
      */
     angular.module("pokerPlanner").service('loginService', [
         'Restangular', 'APP_CONSTANTS',
-        
         function(
             Restangular, APP_CONSTANTS
         ) {
-            this.getUser = user => {
-                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.LOGIN).post(user);
-            };
+            this.getUser = user => Restangular.all(APP_CONSTANTS.API_ENDPOINT.LOGIN).post(user);
     }]); 
 })();

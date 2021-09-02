@@ -5,10 +5,10 @@
     <div class="form-group mt-3">
       <label class="required" for="email">Email address</label>
       <input type="email" name="email" ng-change="credentialsChanged()" ng-model="email" class="form-control grey-back" id="email"
-        aria-describedby="emailHelp" required placeholder="Enter email">
+        aria-describedby="emailHelp" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required placeholder="Enter email">
       <div ng-messages="loginForm.email.$error" class="invalid mt-1" role="alert">
         <span ng-show="loginForm.email.$touched" ng-message="required">Email is required!</span>
-        <span ng-message="email">Not a valid email address!</span>
+        <span ng-show="loginForm.email.$dirty && loginForm.email.$error.pattern">Not a valid email address!</span>
       </div>
     </div>
     <div class="form-group mt-3">
@@ -20,10 +20,10 @@
       </div>
     </div>
     <div class="mt-2">
-      <span ng-show="isError" class="f-12 text-danger mb-2">{{ errorMsg }}</span>
+      <span ng-show="errorMsg.length > 0" class="f-12 text-danger mb-2">{{ errorMsg }}</span>
     </div>
     <div class="d-flex mt-3">
-      <button ng-disabled="loginForm.$invalid" type="submit" class="btn btn-success">Submit</button>
+      <button ng-disabled="loginForm.$invalid || errorMsg.length > 0" type="submit" class="btn btn-success">Submit</button>
       <p class="redirect-extras" ng-click="redirectToSignup()">New User ?</p>
     </div>
   </form>
