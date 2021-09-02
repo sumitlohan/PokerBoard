@@ -9,6 +9,7 @@
         function ($scope, $rootScope, $state, signupService, APP_CONSTANTS) {
 
             $scope.showError = false;
+            $rootScope.signedUp = false;
 
             /**
              * Checks if email already exists
