@@ -27,7 +27,7 @@
 
                 signupService.createUser(user).then(response => {
                     $rootScope.signedUp = true;
-                    $state.go('login');
+                    $scope.goToLogin();
                 }, error => {
                     if (error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
                         $scope.existingEmail = $scope.email;
