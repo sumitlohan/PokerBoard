@@ -1,10 +1,10 @@
 'use strict';
 (function () {
     angular.module('pokerPlanner').controller('loginCtrl', [
-        '$scope', '$state', '$cookies', 'loginService',
+        '$scope', '$rootScope', '$state', '$cookies', 'loginService',
 
         function (
-          $scope, $state, $cookies, loginService
+          $scope, $rootScope, $state, $cookies, loginService
         ) {
         
             $scope.redirectToSignup = () => {
@@ -14,8 +14,7 @@
             $scope.onSubmit = () => {
                 loginService.getUser({ email: $scope.email, password: $scope.password })
                 .then(response => {
-                    $scope.errorStatus = false;
-
+                    $scope.errorMsg = undefined;
                     const user = {
                         token: response.token,
                         id: response.id,
@@ -23,12 +22,17 @@
                         last_name: response.last_name,
                         email: response.email
                     }
+                    $rootScope.isAuth = response.token;
+                    $rootScope.user = user;
                     $cookies.put('user', JSON.stringify(user));
-                
-                    // goto dashboard
+
+                    // TODO: $state.go('pokerboard');
                 }, error => {
-                    $scope.errorStatus = true;
-                    $scope.errorMsg = "Invalid Email or Password"
+                    if ('email' in error.data){
+                        $scope.errorMsg = error.data.email[0];
+                    }else if ('non_field_errors' in error.data){
+                        $scope.errorMsg = error.data.non_field_errors[0];
+                    }
                 });
             }
         }
