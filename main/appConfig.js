@@ -2,7 +2,6 @@
 (function () {
     angular.module ("pokerPlanner").config (['$stateProvider', '$urlRouterProvider', 'RestangularProvider', 
         'APP_CONSTANTS',
-
         function ($stateProvider, $urlRouterProvider, RestangularProvider, APP_CONSTANTS) {
             $stateProvider
                 .state('404-page-not-found', {

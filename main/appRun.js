@@ -23,7 +23,7 @@
                         return transition.router.stateService.target('pokerboard');
                     }
                 } else {
-                    if (APP_CONSTANTS.ROUTES.AUTH_ROUTES.find((route) => route === transition.to().name)) {
+                    if (!APP_CONSTANTS.ROUTES.UNAUTH_ROUTES.find((route) => route === transition.to().name)) {
                         return transition.router.stateService.target('login');
                     }
                 }
