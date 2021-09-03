@@ -21,7 +21,6 @@
                 }, error => {
                     $scope.errorMsg = error.data.password[0];
                 });
-                $scope.profileUpdated = true;
             };
         }
     ]);
