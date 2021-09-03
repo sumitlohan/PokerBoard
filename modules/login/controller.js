@@ -9,6 +9,7 @@
             };
 
             $scope.credentialsChanged = function () {
+                /* Hiding the displayed error if form is edit again */
                 if($scope.prevEmail == $scope.email && $scope.prevPass == $scope.password){
                     $scope.isError = true;
                 }else{
@@ -17,8 +18,8 @@
             };
 
             $scope.onSubmit = () => {
-                loginService.getUser({ email: $scope.email, password: $scope.password })
-                .then(response => {
+                /* Atempt to login with given credentials */
+                loginService.getUser({ email: $scope.email, password: $scope.password }).then(response => {
                     $scope.errorMsg = undefined;
                     $scope.isError = false;
                     const user = {
@@ -42,12 +43,17 @@
                     // TODO: $state.go('pokerboard');
                 }, error => {
                     if ('email' in error.data){
+                        /* If any occurs in email it will be handled below */
                         $scope.errorMsg = error.data.email[0];
-                        $scope.isError = true;
                     }else if ('non_field_errors' in error.data){
-                        $scope.isError = true;
+                        /* If combination of email-pass does not match and
+                        if account is not activated it will be handled below */
                         $scope.errorMsg = error.data.non_field_errors[0];
+                    }else{
+                        /* We are not supposed to get any other error */
+                        $scope.errorMsg = "Unexpected error from server"
                     }
+                    $scope.isError = true;
                     $scope.prevEmail = $scope.email;
                     $scope.prevPass = $scope.password;
                 });
