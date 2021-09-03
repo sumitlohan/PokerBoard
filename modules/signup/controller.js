@@ -9,6 +9,7 @@
         function ($scope, $rootScope, $state, signupService, APP_CONSTANTS) {
 
             $scope.showError = false;
+            $rootScope.signedUp = false;
 
             /**
              * Checks if email already exists
@@ -27,7 +28,7 @@
 
                 signupService.createUser(user).then(response => {
                     $rootScope.signedUp = true;
-                    $state.go('login');
+                    $scope.goToLogin();
                 }, error => {
                     if (error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
                         $scope.existingEmail = $scope.email;

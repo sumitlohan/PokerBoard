@@ -19,14 +19,14 @@
                 $scope.emailInviteForm = false;
             }
             
-            $scope.getPokerboardDetails = () => {
+            init = () => {
                 pokerboardService.getPokerboardDetails(pokerboardId).then(response => {
                     $scope.pokerboard = response;
                 }, error => {
                     $state.go('404-page-not-found');
                 })
             }
-            $scope.getPokerboardDetails();
+            init();
 
             // pokerboardService.getTickets().then(response => {
             //     $scope.boardList = [];
