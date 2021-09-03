@@ -15,13 +15,13 @@
 
             $scope.onSubmit = () => {
                 /* User is trying to change password or other data */
-                // const data = $scope.password == undefined ? {first_name: $scope.firstname, last_name: $scope.lastname} : {first_name: $scope.firstname, last_name: $scope.lastname, password: $scope.password};
-                // profileService.updateUser(user.id, data).then(response => {
-                //     $rootScope.profileUpdated = true;
-                // }, error => {
-                //     $scope.errorMsg = error.data.password[0];
-                // });
-                $rootScope.profileUpdated = true;
+                const data = $scope.password == undefined ? {first_name: $scope.firstname, last_name: $scope.lastname} : {first_name: $scope.firstname, last_name: $scope.lastname, password: $scope.password};
+                profileService.updateUser(user.id, data).then(response => {
+                    // TODO: Show toast -- library implemented in other branches
+                }, error => {
+                    $scope.errorMsg = error.data.password[0];
+                });
+                $scope.profileUpdated = true;
             };
         }
     ]);
