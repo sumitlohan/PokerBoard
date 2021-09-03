@@ -27,6 +27,12 @@
                     controller: 'loginCtrl'
                 })
 
+                .state('profile', {
+                    url: '/profile',
+                    templateUrl: 'modules/profile/profile.html',
+                    controller: 'profileCtrl'
+                })
+
                 .state('pokerboard', {
                     url: '/',
                     templateUrl: 'modules/pokerboard/pokerboard.html',
