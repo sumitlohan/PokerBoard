@@ -13,14 +13,20 @@
                 return Restangular.one(APP_CONSTANTS.API_ENDPOINT.POKERBOARD).get();
             }
 
-            // this.getTickets = () => {
-            //     return Restangular.one(APP_CONSTANTS.API_ENDPOINT.TICKETS).get();
-            // }
-
+            /**
+             * Fetches pokerboard through pokerboard id
+             * @param {*} pokerboardId 
+             * @returns pokerboard details
+             */
             this.getPokerboardDetails = pokerboardId => {
                 return Restangular.one(APP_CONSTANTS.API_ENDPOINT.POKERBOARD, pokerboardId).get();
             }
 
+            /**
+             * Creates invite
+             * @param {*} user 
+             * @returns invitee details
+             */
             this.inviteUser = user => {
                 return Restangular.all(APP_CONSTANTS.API_ENDPOINT.INVITE).post(user)
             }

@@ -11,15 +11,24 @@
             $scope.showUserError = false;
             $scope.showGroupError = false;
 
+            /**
+             * Shows form to invite through email
+             */
             $scope.showEmailForm = () => {
                 $scope.emailInviteForm = true;
             }
 
+            /**
+             * Shows form to invite through group
+             */
             $scope.showGroupForm = () => {
                 $scope.emailInviteForm = false;
             }
             
-            init = () => {
+            /**
+             * Fetch details of the pokerboard
+             */
+            const init = () => {
                 pokerboardService.getPokerboardDetails(pokerboardId).then(response => {
                     $scope.pokerboard = response;
                 }, error => {
@@ -28,28 +37,23 @@
             }
             init();
 
-            // pokerboardService.getTickets().then(response => {
-            //     $scope.boardList = [];
-            //     response.forEach(parse);
-            //     function parse(ele) {
-            //         $scope.boardList.push({
-            //             id: ele.id,
-            //             title: ele.title,
-            //             state: ele.status,
-            //             date: new Date(ele.created_at).toLocaleDateString(),
-            //             creator: ele.manager.first_name + ele.manager.last_name,
-            //         });
-            //     }
-            // });
-
+            /**
+             * Invokes error when user is already invited
+             */
             $scope.isUserError = () => {
                 $scope.showUserError = ($scope.existingInvite === $scope.email);
             };
 
+            /**
+             * Invokes error when group is already invited
+             */
             $scope.isGroupError = () => {
                 $scope.showGroupError = ($scope.existingInvite === $scope.group);
             };
 
+            /**
+             * Invokes error when group does not exist
+             */
             $scope.isError = () => {
                 $scope.showError = ($scope.notExistingGroup === $scope.group);
             };
@@ -64,6 +68,9 @@
                     group_name: ($scope.emailInviteForm) ? null : $scope.group,
                     role: $scope.role
                 }
+                /**
+                 * Creates invites and checks for errors, if encountered
+                 */
                 pokerboardService.inviteUser(user).then(response => {
                     // $scope.pokerboard.invites = [...$scope.pokerboard.invites, {user: response.user}]
                 }, error => {

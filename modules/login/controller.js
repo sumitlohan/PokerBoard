@@ -8,12 +8,12 @@
                 $state.go('signup');
             };
 
-<<<<<<< HEAD
             $scope.onSubmit = () => {
                 loginService.getUser({ email: $scope.email, password: $scope.password })
                 .then(response => {
                     $scope.errorStatus = false;
-=======
+                })
+            }
             $scope.credentialsChanged = function () {
                 /* Hiding the displayed error if form is edit again */
                 if($scope.prevEmail == $scope.email && $scope.prevPass == $scope.password){
@@ -28,7 +28,7 @@
                 loginService.getUser({ email: $scope.email, password: $scope.password }).then(response => {
                     $scope.errorMsg = undefined;
                     $scope.isError = false;
->>>>>>> PP-FE-4-Dashboard
+
                     const user = {
                         token: response.token,
                         id: response.id,

@@ -1,6 +1,6 @@
 <div class="m-2">
     <div class=" m-2 d-flex justify-content-between">
-        <h2>{{pokerboard.title}}</h2>
+        <h2>{{ pokerboard.title }}</h2>
         <button data-bs-toggle="modal" data-bs-target="#inviteUserModal" ng-show="user.id==pokerboard.manager.id"
             class="btn btn-success">Invite user</button>
     </div>
@@ -71,29 +71,14 @@
             </div>
             <div class="hor-rule"></div>
         </div>
-        <!-- <div ng-repeat="board in boardList"> -->
+        <div ng-repeat="ticket in pokerboard.tickets">
             <div class="tab-content">
-                <!-- <p><a href="">{{ board.title }}</a></p>
-                <P>{{ board.state }}</P>
-                <P>{{ board.date }}</P>
-                <P>{{ board.creator }}</P> -->
-                <p><a href="">Example ticket</a></p>
+                <p>{{ ticket.ticket_id }}</p>
                 <button class="join-btn bg-dark">Estimate</button>
-                <button class="btn-delete bg-dark">Up</button>
-                <button class="btn-delete bg-dark">Down</button>
+                <button class="btn-delete bg-dark"><i class="bi bi-arrow-up"></i></button>
+                <button class="btn-delete bg-dark"><i class="bi bi-arrow-down"></i></button>
             </div>
             <div class="hor-rule"></div>
-        <!-- </div> -->
+        </div>
     </div>
-    <!-- <ul class="">
-        <li class="card my-2" ng-repeat="member in group.members">
-            <div class="card-body row">
-                <p class="col-4">{{member.user.first_name}} {{member.user.last_name}}</p>
-                <p class=" col-4 text-secondary">{{member.user.email}}</p>
-                <div class="col-4">
-                    <button disabled ng-show="user.id==group.created_by" class="btn btn-danger">Remove</button>
-                </div>
-            </div>
-        </li>
-    </ul> -->
 </div>
