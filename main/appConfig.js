@@ -1,9 +1,7 @@
 'use strict';
 (function () {
     angular.module("pokerPlanner").config([
-        '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 
-        'APP_CONSTANTS',
-
+        '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 'APP_CONSTANTS',
         function (
             $stateProvider, $urlRouterProvider, RestangularProvider, 
             APP_CONSTANTS,

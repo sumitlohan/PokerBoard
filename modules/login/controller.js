@@ -3,7 +3,7 @@
     angular.module('pokerPlanner').controller('loginCtrl', [
         '$scope', '$rootScope', '$state', '$cookies', 'loginService',
         function (
-          $scope, $rootScope, $state, $cookies, loginService
+            $scope, $rootScope, $state, $cookies, loginService
         ) {
             $scope.redirectToSignup = () => {
                 /* Redirect to signup page */
