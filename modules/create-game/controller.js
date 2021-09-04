@@ -6,7 +6,7 @@
         function (
             $scope, $rootScope, $state, $cookies, createGameService, $mdToast, APP_CONSTANTS, $window
         ) {
-            init = function () {
+            const init = function () {
                 /* Initializing function */
                 createGameService.getSuggestions().then(response => {
                     /* Import porjects and sprints from JIRA */
