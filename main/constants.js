@@ -9,6 +9,7 @@
             SUGGESTIONS: 'pokerboards/suggestions',
             JQL: 'pokerboards/jql',
             INVITE: 'invite',
+            GAME_SESSION: 'pokerboards/game',
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',

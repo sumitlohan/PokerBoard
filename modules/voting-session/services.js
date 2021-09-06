@@ -1,7 +1,7 @@
 'use strict';
 (function () {
     /**
-     * Creates game with user specified data
+     * Creates game session and get already created game sessions
      */
     angular.module("pokerPlanner").service('votingSessionService', [
         'Restangular', 'APP_CONSTANTS',
@@ -9,19 +9,14 @@
         function(
             Restangular, APP_CONSTANTS
         ) {
-            /* Get projects and sprints from JIRA */
-            this.getSuggestions = function(){
-                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.SUGGESTIONS).get();
+            /* Get active game session */
+            this.getSession = pokerboardId => {
+                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.GAME_SESSION, pokerboardId).get();
             };
 
-            /* Get the list of tickets from JQL query */
-            this.getTickets = function(query){
-                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.JQL + query).get();
-            };
-
-            /* Creating the pokerboard game */
-            this.createGame = function(data){
-                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.POKERBOARD).post(data);
-            };
+            /* Create game session */
+            this.createSession = data => {
+                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.GAME_SESSION).post(data);
+            }
     }]); 
 })();
