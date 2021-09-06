@@ -44,6 +44,11 @@
                     controller: "pokerboardDetailsCtrl",
                 })
 
+                .state('invite-acception', {
+                    url: '/join/:iid',
+                    templateUrl: 'modules/invite-acception/inviteAcception.html',
+                    controller: 'invitationCtrl'
+                });
             $urlRouterProvider.otherwise("/404-page-not-found");
             
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);
