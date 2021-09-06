@@ -44,6 +44,12 @@
                     controller: "pokerboardDetailsCtrl",
                 })
 
+                .state('voting-session', {
+                    url: "/session",
+                    templateUrl: "modules/voting-session/voting-session.html",
+                    controller: "votingSessionCtrl",
+                })
+
             $urlRouterProvider.otherwise("/404-page-not-found");
             
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);

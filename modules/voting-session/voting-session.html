@@ -1,0 +1,44 @@
+<div class="back-univ">
+    <div class="estimate-outer">
+        <p class="estimate-head">ESTIMATED POINTS</p>
+        <div class=point-outer>
+            <p class="point-cont btn-dark">0</p>
+        </div>
+        <p class="estimate-head">PARTICIPANTS</p>
+        <div class="point-outer" ng-repeat="participant in participantList">
+            <p class="part-name">{{ participant }}</p>
+        </div>
+    </div>
+    <div class="voting-main">
+        <h4 class="mt-4">Game title</h4>
+        <h5 class="mt-2">This is game description</h5>
+        <div class="ticket-back mt-4">
+            <h5 class="hyper-text">Ticket ID : Hello this is sample ticket title</h5>
+            <div class="hr-line"></div>
+            <div class="flex move-right mt-2">
+                <button title="Show linked issue" class="btn-dim btn-dark mr-15"><i class="fa fa-link"></i></button>
+                <button title="Show attachments" class="btn-dim btn-dark mr-15"><i class="fa fa-paperclip"></i></button>
+                <button title="Add comment" class="btn-dim btn-dark mr-15"><i class="fa fa-plus"></i></button>
+                <button title="Show comments" class="btn-dim btn-dark mr-15"><i class="fa fa-comments"></i></button>
+                <button title="Edit issue" class="btn-dim btn-dark mr-15"><i class="fa fa-pencil"></i></button>
+            </div>
+            <p class="mt-3">This is my sample ticket description Lorem, ipsum dolor sit amet consectetur adipisicing
+                elit.
+                Excepturi quod exercitationem harum error obcaecati hic laudantium ipsum quaerat voluptatum dignissimos
+                beatae sit, ullam nulla aperiam, aut cupiditate, rerum eum perspiciatis?</p>
+            <div class="flex label-cont">
+                <p>bugs</p>
+                <p>angularJS</p>
+                <p>django</p>
+            </div>
+        </div>
+        <div class="flex mt-5">
+            <div ng-repeat="card in cardList">
+                <p class="card-back">{{ card }}</p>
+            </div>
+        </div>
+        <div class="card-bottom-cont">
+            <div class="hr-line mb-5"></div>
+        </div>
+    </div>
+</div>
