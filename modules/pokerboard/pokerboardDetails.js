@@ -31,6 +31,7 @@
             const init = () => {
                 pokerboardService.getPokerboardDetails(pokerboardId).then(response => {
                     $scope.pokerboard = response;
+                    console.log(response);
                 }, error => {
                     $state.go('404-page-not-found');
                 })
@@ -91,7 +92,7 @@
 
             $scope.createSession = ticketId => {
                 pokerboardService.createSession({"ticket": ticketId}).then(response => {
-                    $state.go('voting-session', {id: ticketId});
+                    $state.go('voting-session', {id: pokerboardId});
                 }, error => {
                     $mdToast.show($mdToast.simple().textContent(error.data.ticket[0]));
                 });

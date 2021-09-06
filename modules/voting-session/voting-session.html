@@ -10,26 +10,20 @@
         </div>
     </div>
     <div class="voting-main">
-        <h4 class="mt-4">Game title</h4>
-        <h5 class="mt-2">This is game description</h5>
+        <h4 class="mt-4">{{ title }}</h4>
+        <h5 class="mt-2">{{ description }}</h5>
         <div class="ticket-back mt-4">
-            <h5 class="hyper-text">Ticket ID : Hello this is sample ticket title</h5>
+            <h5 class="hyper-text">{{ issueTitle }}</h5>
             <div class="hr-line"></div>
             <div class="flex move-right mt-2">
-                <button title="Show linked issue" class="btn-dim btn-dark mr-15"><i class="fa fa-link"></i></button>
-                <button title="Show attachments" class="btn-dim btn-dark mr-15"><i class="fa fa-paperclip"></i></button>
                 <button title="Add comment" class="btn-dim btn-dark mr-15"><i class="fa fa-plus"></i></button>
                 <button title="Show comments" class="btn-dim btn-dark mr-15"><i class="fa fa-comments"></i></button>
-                <button title="Edit issue" class="btn-dim btn-dark mr-15"><i class="fa fa-pencil"></i></button>
             </div>
-            <p class="mt-3">This is my sample ticket description Lorem, ipsum dolor sit amet consectetur adipisicing
-                elit.
-                Excepturi quod exercitationem harum error obcaecati hic laudantium ipsum quaerat voluptatum dignissimos
-                beatae sit, ullam nulla aperiam, aut cupiditate, rerum eum perspiciatis?</p>
-            <div class="flex label-cont">
-                <p>bugs</p>
-                <p>angularJS</p>
-                <p>django</p>
+            <p class="mt-3">{{issueDescription}}</p>
+            <div class="flex">
+                <div class="label-cont" ng-repeat="label in labelList">
+                    <p>{{ label }}</p>
+                </div>
             </div>
         </div>
         <div class="flex mt-5">
