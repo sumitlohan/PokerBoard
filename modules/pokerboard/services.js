@@ -30,5 +30,14 @@
             this.inviteUser = user => {
                 return Restangular.all(APP_CONSTANTS.API_ENDPOINT.INVITE).post(user)
             }
+
+            /**
+             * Creates invite
+             * @param {*} data 
+             * @returns session details
+             */
+            this.createSession = data => {
+                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.GAME_SESSION).post(data);
+            }
     }]); 
 })();

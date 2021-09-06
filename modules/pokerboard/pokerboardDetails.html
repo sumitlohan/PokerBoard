@@ -74,7 +74,7 @@
         <div ng-repeat="ticket in pokerboard.tickets">
             <div class="tab-content">
                 <p>{{ ticket.ticket_id }}</p>
-                <button class="join-btn bg-dark">Estimate</button>
+                <button ng-click="createSession(ticket.id)" class="join-btn bg-dark">Estimate</button>
                 <button class="btn-delete bg-dark"><i class="bi bi-arrow-up"></i></button>
                 <button class="btn-delete bg-dark"><i class="bi bi-arrow-down"></i></button>
             </div>

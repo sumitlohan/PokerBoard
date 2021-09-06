@@ -45,7 +45,7 @@
                 })
 
                 .state('voting-session', {
-                    url: "/session",
+                    url: "/session/:id",
                     templateUrl: "modules/voting-session/voting-session.html",
                     controller: "votingSessionCtrl",
                 })

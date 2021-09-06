@@ -1,9 +1,9 @@
 'use strict';
 (function () {
     angular.module('pokerPlanner').controller('pokerboardDetailsCtrl', [
-        '$state', '$scope', '$stateParams', 'pokerboardService', 'APP_CONSTANTS',
-        function ($state, $scope, $stateParams, pokerboardService, APP_CONSTANTS) {
-            
+        '$state', '$scope', '$stateParams', 'pokerboardService', 'APP_CONSTANTS', '$mdToast',
+        function ($state, $scope, $stateParams, pokerboardService, APP_CONSTANTS, $mdToast) {
+
             $scope.pokerboard = {};
             const pokerboardId = $stateParams.id;
             $scope.email = "";
@@ -24,7 +24,7 @@
             $scope.showGroupForm = () => {
                 $scope.emailInviteForm = false;
             }
-            
+
             /**
              * Fetch details of the pokerboard
              */
@@ -88,5 +88,14 @@
                     }
                 });
             }
+
+            $scope.createSession = ticketId => {
+                pokerboardService.createSession({"ticket": ticketId}).then(response => {
+                    $state.go('voting-session', {id: ticketId});
+                }, error => {
+                    $mdToast.show($mdToast.simple().textContent(error.data.ticket[0]));
+                });
+            }
+
         }]);
 })();
