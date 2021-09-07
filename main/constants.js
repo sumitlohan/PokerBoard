@@ -2,6 +2,7 @@
 (function () {
     angular.module("pokerPlanner").constant("APP_CONSTANTS", {
         BASE_URL: config.BASE_URL,
+        WS_BASE_URL: config.WS_BASE_URL,
         API_ENDPOINT: {
             SIGNUP: 'accounts/register',
             LOGIN: 'accounts/login',
@@ -10,6 +11,7 @@
             JQL: 'pokerboards/jql',
             INVITE: 'invite',
             GAME_SESSION: 'pokerboards/game',
+            COMMENT: 'pokerboards/comment',
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',
@@ -18,6 +20,10 @@
             USER_ALREADY_INVITED: 'User already invited',
             GROUP_ALREADY_INVITED: 'Group already invited',
             GROUP_DOES_NOT_EXIST: 'Group does not exist',
+            COMMENT_POST_FAILED: 'Failed to post comment',
+        },
+        SUCCESS_MESSAGES: {
+            COMMENT_ADDED: 'Comment added successfully',
         },
         ROUTES: {
             //access whether user is authenticated or not
