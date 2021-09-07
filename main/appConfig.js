@@ -27,9 +27,15 @@
                     url: '/login',
                     templateUrl: 'modules/login/login.html',
                     controller: 'loginCtrl'
+                })
+
+                .state('email-verification', {
+                    url: '/activate/:uid/:token',
+                    templateUrl: 'modules/emailVerification/email-verification.html',
+                    controller: 'emailVerificationCtrl'
                 });
 
-            $urlRouterProvider.otherwise("/404-page-not-found");
+            // $urlRouterProvider.otherwise("/404-page-not-found");
             
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);
         }   
