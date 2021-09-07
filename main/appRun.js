@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-    angular.module ("pokerPlanner").run(($rootScope, $state, $cookies, $transitions, Restangular, APP_CONSTANTS) => {
+    angular.module("pokerPlanner").run(($rootScope, $state, $cookies, $transitions, Restangular, APP_CONSTANTS) => {
         const user = JSON.parse($cookies.get('user') || ("{}"));
         $rootScope.user = user;
         const token = user?.token;

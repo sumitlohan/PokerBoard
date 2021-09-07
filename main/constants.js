@@ -5,9 +5,12 @@
         API_ENDPOINT: {
             SIGNUP: 'accounts/register',
             LOGIN: 'accounts/login',
+            ACCOUNT_ACTIVATE: 'accounts/activate/',
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',
+            PASSWORD_VALIDATION: `Password must be of minimum 8 characters, 
+            at least one uppercase letter, lowercase letter, number and special character`,
         },
         ROUTES: {
             //access whether user is authenticated or not

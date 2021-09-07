@@ -22,3 +22,9 @@
     color: red;
     font-size: 14px;
 }
+
+.note{
+    font-size: 13px;
+    color: rgb(13, 60, 216);
+    width: 300px;
+}
