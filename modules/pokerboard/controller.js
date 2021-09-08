@@ -13,7 +13,7 @@
                         title: ele.title,
                         state: APP_CONSTANTS.POKERBOARD_STATUS[ele.status],
                         date: new Date(ele.created_at).toLocaleDateString(),
-                        creator: ele.manager.first_name + ele.manager.last_name,
+                        creator: ele.manager.first_name + " " + ele.manager.last_name,
                     });
                 }
             });
