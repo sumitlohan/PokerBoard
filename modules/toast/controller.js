@@ -1,6 +1,7 @@
 'use strict';
 (function() {
-    angular.module('pokerPlanner').controller('toastCtrl', ['toast',
+    angular.module('pokerPlanner').controller('toastCtrl', [
+        'toast',
         function (toast) {
             toast.create ({
                 timeout: 2 * 1000,
