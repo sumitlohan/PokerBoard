@@ -3,13 +3,14 @@
     /**
      * Controller for signup
      */
-
-    angular.module('pokerPlanner').controller('signupCtrl', ['$scope', '$rootScope', '$state', 'signupService', 
-        'APP_CONSTANTS',
-        function ($scope, $rootScope, $state, signupService, APP_CONSTANTS) {
-
+    angular.module('pokerPlanner').controller('signupCtrl', [
+        '$scope', '$rootScope', '$state', '$cookies', 'signupService', 'APP_CONSTANTS',
+        function(
+            $scope, $rootScope, $state, $cookies, signupService, APP_CONSTANTS
+        ) {
             $scope.showError = false;
             $rootScope.signedUp = false;
+            $scope.passNote = APP_CONSTANTS.ERROR_MESSAGES.PASSWORD_VALIDATION;
 
             /**
              * Checks if email already exists
@@ -30,7 +31,11 @@
                     $rootScope.signedUp = true;
                     $scope.goToLogin();
                 }, error => {
-                    if (error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
+                    if(error.status === 404)
+                        $state.go('404-page-not-found');
+                    else if(error.status === 500)
+                        $state.go('500-internal-server-error');
+                    else if(error.data.email[0] === APP_CONSTANTS.ERROR_MESSAGES.EMAIL) {
                         $scope.existingEmail = $scope.email;
                         $scope.isEmailError();
                     }

@@ -12,6 +12,7 @@
             INVITE: 'invite',
             GAME_SESSION: 'pokerboards/game',
             COMMENT: 'pokerboards/comment',
+            ACCOUNT_ACTIVATE: 'accounts/activate/',
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',
@@ -25,6 +26,14 @@
         SUCCESS_MESSAGES: {
             COMMENT_ADDED: 'Comment added successfully',
         },
+        DECK_TYPE: {
+            FIBONACCI: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55],
+            SERIES: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            EVEN: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
+            ODD: [0, 1, 3, 5, 7, 9, 11, 13, 15, 17],
+            PASSWORD_VALIDATION: `Password must be of minimum 8 characters, 
+            at least one uppercase letter, lowercase letter, number and special character`,
+        },
         ROUTES: {
             //access whether user is authenticated or not
             PUBLIC_ROUTES: ['404-page-not-found', '500-internal-server-error'],
@@ -34,6 +43,10 @@
         ERROR_ROUTES: {
             404: '404-page-not-found',
             500: '500-internal-server-error',
+        },
+        POKERBOARD_STATUS: {
+            1: 'Started',
+            2: 'Ended'
         }
     });
 })();

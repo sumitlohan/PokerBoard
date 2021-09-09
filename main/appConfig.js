@@ -1,8 +1,10 @@
 'use strict';
 (function () {
-    angular.module ("pokerPlanner").config (['$stateProvider', '$urlRouterProvider', 'RestangularProvider', 
-        'APP_CONSTANTS',
-        function ($stateProvider, $urlRouterProvider, RestangularProvider, APP_CONSTANTS) {
+    angular.module("pokerPlanner").config([
+        '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 'APP_CONSTANTS',
+        function (
+            $stateProvider, $urlRouterProvider, RestangularProvider, APP_CONSTANTS,
+        ) {
             $stateProvider
                 .state('404-page-not-found', {
                     url: '/404-page-not-found',
@@ -43,12 +45,18 @@
                     templateUrl: "modules/pokerboard/pokerboardDetails.html",
                     controller: "pokerboardDetailsCtrl",
                 })
+                
+                .state('email-verification', {
+                    url: '/activate/:uid/:token',
+                    templateUrl: 'modules/emailVerification/email-verification.html',
+                    controller: 'emailVerificationCtrl'
+                })
 
                 .state('voting-session', {
                     url: "/session/:id",
                     templateUrl: "modules/voting-session/voting-session.html",
                     controller: "votingSessionCtrl",
-                })
+                });
 
             $urlRouterProvider.otherwise("/404-page-not-found");
             
