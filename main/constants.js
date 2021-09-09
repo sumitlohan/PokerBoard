@@ -9,6 +9,7 @@
             SUGGESTIONS: 'pokerboards/suggestions',
             JQL: 'pokerboards/jql',
             INVITE: 'invite',
+            ACCOUNT_ACTIVATE: 'accounts/activate/',
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',
@@ -17,6 +18,8 @@
             USER_ALREADY_INVITED: 'User already invited',
             GROUP_ALREADY_INVITED: 'Group already invited',
             GROUP_DOES_NOT_EXIST: 'Group does not exist',
+            PASSWORD_VALIDATION: `Password must be of minimum 8 characters, 
+            at least one uppercase letter, lowercase letter, number and special character`,
         },
         ROUTES: {
             //access whether user is authenticated or not
@@ -27,6 +30,10 @@
         ERROR_ROUTES: {
             404: '404-page-not-found',
             500: '500-internal-server-error',
+        },
+        POKERBOARD_STATUS: {
+            1: 'Started',
+            2: 'Ended'
         }
     });
 })();

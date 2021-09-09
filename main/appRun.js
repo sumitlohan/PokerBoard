@@ -1,12 +1,12 @@
 'use strict';
 (function () {
-    angular.module ("pokerPlanner").run(($rootScope, $state, $cookies, $transitions, Restangular, APP_CONSTANTS) => {
+    angular.module("pokerPlanner").run(($rootScope, $state, $cookies, $transitions, Restangular, APP_CONSTANTS) => {
         const user = JSON.parse($cookies.get('user') || ("{}"));
         $rootScope.user = user;
         const token = user?.token;
         $rootScope.isAuth = token;
 
-        $rootScope.logout = () =>{
+        $rootScope.logout = () => {
             $cookies.remove("user");
             $rootScope.user = {};
             $rootScope.isAuth = false;
@@ -18,7 +18,9 @@
          */
         $transitions.onBefore({ to: "*" }, function (transition) {
             if (!APP_CONSTANTS.ROUTES.PUBLIC_ROUTES.find((route) => route === transition.to().name)) {
-                if ($rootScope.isAuth) {
+                const currentUser = JSON.parse($cookies.get('user') || ("{}"));
+                const authToken = currentUser?.token
+                if (authToken) {
                     if (APP_CONSTANTS.ROUTES.UNAUTH_ROUTES.find((route) => route === transition.to().name)) {
                         return transition.router.stateService.target('pokerboard');
                     }
