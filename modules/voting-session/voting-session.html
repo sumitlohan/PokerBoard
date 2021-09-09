@@ -21,9 +21,9 @@
     </div>
 
     <div class="estimate-outer">
-        <p class="estimate-head">ESTIMATED POINTS</p>
+        <p class="estimate-head">COUNTDOWN TIMER</p>
         <div class=point-outer>
-            <p class="point-cont btn-dark">0</p>
+            <p class="point-cont btn-dark">{{ time }}</p>
         </div>
         <p class="estimate-head">PARTICIPANTS</p>
         <div class="point-outer" ng-repeat="participant in participantList">
@@ -55,13 +55,32 @@
                 <div class="vote-cont">
                     <p class="name-tag">{{ vote.name }}</p>
                     <div class="vl"></div>
-                    <p class="vote-card">{{ vote.short_name }}</p>
+                    <div class="vote-card">
+                        <p class="vote-tags">{{ vote.short_name }}</p>
+                        <p ng-show="isAdmin" class="vote-tags">:{{ vote.estimate }}</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flex mt-3">
-            <div ng-repeat="card in cardList">
-                <p class="card-back">{{ card }}</p>
+        <div ng-show="isAdmin">
+            <div class="card-bottom-cont mt-3">
+                <div class="hr-line"></div>
+            </div>
+            <div class="admin-outer">
+                <p class="part-name mt-3 back-white">Admin Actions</p>
+                <div class="mt-2">
+                    <button type="button" ng-disabled="time != 0" ng-click="startCountdown()" class="btn btn-dark btn-admin">Start countdown</button>
+                    <button type="button" ng-click="skipGame()" class="btn btn-dark btn-admin">Skip and postpone</button>
+                </div>
+            </div>
+            <div class="card-bottom-cont mt-3 mb-3">
+                <div class="hr-line"></div>
+            </div>
+        </div>
+        <p ng-show="time == 0" class="admin-note">Note: You'll be able to vote as soon as countdown starts</p>
+        <div ng-class="{'disable-area': time == 0}" class="flex mt-2">
+            <div ng-click="setEstimate(card, $index)" ng-repeat="card in cardList track by $index">
+                <p id="card{{$index}}" class="card-back">{{ card }}</p>
             </div>
         </div>
         <div class="card-bottom-cont">

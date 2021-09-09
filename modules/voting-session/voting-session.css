@@ -62,8 +62,13 @@
     border: 1px solid rgb(206, 206, 206);
 }
 
-.card-back:hover {
+.card-back:hover{
     top: -15px;
+}
+
+.selected-card{
+    top: -15px;
+    background-color: rgb(219, 219, 219);
 }
 
 .card-bottom-cont{
@@ -111,28 +116,50 @@
     padding: 2px 5px 2px 5px;
     border-radius: 5px;
     font-size: 12px;
+    text-align: center;
     display: inline-block;
     margin: 0;
     margin-top: 5px;
     border: 1px solid rgb(206, 206, 206);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 120px;
 }
 
 .sub-btn{
     float: right;
 }
 
+.disable-area{
+    pointer-events: none;
+}
+
+.admin-note{
+    color: crimson;
+    font-size: 12px;
+}
+
 .vote-card{
     width: 50px;
-    text-align: center;
     height: 80px;
-    font-size: 15px;
     color: rgb(0, 0, 0);
-    line-height: 80px;
-    font-weight: 500;
     border-radius: 5px;
     background-color: rgb(250, 250, 250);
     position: relative;
     border: 1px solid rgb(206, 206, 206);
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.vote-tags{
+    font-size: 12px;
+    text-align: center;
+    font-weight: 600;
+    margin: 0;
+    width: 100%;
 }
 
 .name-tag{
@@ -163,4 +190,20 @@
 
 .vote-area{
     height: 130px;
+}
+
+.btn-admin{
+    padding: 2px 5px 2px 5px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.back-white{
+    background-color: #fff;
+}
+
+.admin-outer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

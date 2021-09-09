@@ -4,9 +4,9 @@
      * Get already created game sessions
      */
     angular.module("pokerPlanner").service('votingSessionService', [
-        'Restangular', 'APP_CONSTANTS', '$websocket', '$rootScope',
+        'Restangular', 'APP_CONSTANTS', '$websocket',
         function (
-            Restangular, APP_CONSTANTS, $websocket, $rootScope
+            Restangular, APP_CONSTANTS, $websocket
         ) {
             /**
              * Get game session
@@ -47,10 +47,11 @@
             /**
              * Connect to websocket
              * @param {*} sessionId
+             * @param {*} token
              * @returns Connection with websocket
              */
-            this.wsConnect = sessionId => {
-                return $websocket(APP_CONSTANTS.WS_BASE_URL + "session/" + sessionId + "?token=" + $rootScope.user.token);
+            this.wsConnect = (sessionId, token) => {
+                return $websocket(APP_CONSTANTS.WS_BASE_URL + "session/" + sessionId + "?token=" + token);
             }
 
         }]);

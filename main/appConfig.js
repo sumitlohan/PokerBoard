@@ -53,6 +53,7 @@
             $urlRouterProvider.otherwise("/404-page-not-found");
             
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);
+            RestangularProvider.setDefaultHttpFields({timeout:5000});
         }   
     ]);
 })();
