@@ -1,10 +1,9 @@
 'use strict';
 (function () {
     angular.module('pokerPlanner').controller('pokerboardCtrl', [
-        '$scope', '$rootScope', '$state', '$cookies', 'pokerboardService',
-
+        '$scope', '$rootScope', '$state', '$cookies', 'pokerboardService', 'APP_CONSTANTS',
         function (
-            $scope, $rootScope, $state, $cookies, pokerboardService
+            $scope, $rootScope, $state, $cookies, pokerboardService, APP_CONSTANTS
         ) {
             pokerboardService.getPokerboards().then(response => {
                 $scope.boardList = [];
@@ -13,9 +12,9 @@
                     $scope.boardList.push({
                         id: ele.id,
                         title: ele.title,
-                        state: ele.status,
+                        state: APP_CONSTANTS.POKERBOARD_STATUS[ele.status],
                         date: new Date(ele.created_at).toLocaleDateString(),
-                        creator: ele.manager.first_name + ele.manager.last_name,
+                        creator: ele.manager.first_name + " " + ele.manager.last_name,
                     });
                 }
             });
