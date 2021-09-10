@@ -1,8 +1,9 @@
 'use strict';
 (function () {
-    angular.module('pokerPlanner').controller('profileCtrl', ['$scope', '$rootScope', '$state', '$cookies', 'profileService',
-        function ($scope, $rootScope, $state, $cookies, profileService) {
+    angular.module('pokerPlanner').controller('profileCtrl', ['$scope', '$rootScope', '$state', '$cookies', 'profileService', 'APP_CONSTANTS',
+        function ($scope, $rootScope, $state, $cookies, profileService, APP_CONSTANTS) {
             const user = JSON.parse($cookies.get('user') || ("{}"));
+            $scope.passNote = APP_CONSTANTS.ERROR_MESSAGES.PASSWORD_VALIDATION;
             const init = function () {
                 profileService.getUser(user.id).then(response => {
                     $scope.email = response.email;
@@ -22,6 +23,58 @@
                     $scope.errorMsg = error.data.password[0];
                 });
             };
+
+            $scope.pokerboardList = [
+                {
+                    title: "Sample title",
+                    description: "Sample description",
+                    status: "STARTED",
+                },
+                {
+                    title: "Sample title",
+                    description: "Sample description",
+                    status: "STARTED",
+                },
+                {
+                    title: "Sample title",
+                    description: "Sample description",
+                    status: "STARTED",
+                },
+                {
+                    title: "Sample title",
+                    description: "Sample description",
+                    status: "STARTED",
+                },
+                {
+                    title: "Sample title",
+                    description: "Sample description",
+                    status: "STARTED",
+                },
+                {
+                    title: "Sample title",
+                    description: "Sample description",
+                    status: "STARTED",
+                },
+            ];
+
+            $scope.groupList = [
+                {
+                    name: "Sample name",
+                    createdAt: "23-08-2018"
+                },
+                {
+                    name: "Sample name",
+                    createdAt: "23-08-2018"
+                },
+                {
+                    name: "Sample name",
+                    createdAt: "23-08-2018"
+                },
+                {
+                    name: "Sample name",
+                    createdAt: "23-08-2018"
+                },
+            ];
         }
     ]);
 })()
