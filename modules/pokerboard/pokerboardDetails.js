@@ -31,7 +31,6 @@
             const init = () => {
                 pokerboardService.getPokerboardDetails(pokerboardId).then(response => {
                     $scope.pokerboard = response;
-                    console.log(response);
                 }, error => {
                     $state.go('404-page-not-found');
                 })

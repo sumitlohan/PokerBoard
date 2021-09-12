@@ -22,17 +22,25 @@
             GROUP_ALREADY_INVITED: 'Group already invited',
             GROUP_DOES_NOT_EXIST: 'Group does not exist',
             COMMENT_POST_FAILED: 'Failed to post comment',
+            PASSWORD_VALIDATION: `Password must be of minimum 8 characters, 
+            at least one uppercase letter, lowercase letter, number and special character`,
         },
         SUCCESS_MESSAGES: {
             COMMENT_ADDED: 'Comment added successfully',
         },
         DECK_TYPE: {
-            FIBONACCI: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55],
-            SERIES: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-            EVEN: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
-            ODD: [0, 1, 3, 5, 7, 9, 11, 13, 15, 17],
-            PASSWORD_VALIDATION: `Password must be of minimum 8 characters, 
-            at least one uppercase letter, lowercase letter, number and special character`,
+            1: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            2: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
+            3: [0, 1, 3, 5, 7, 9, 11, 13, 15, 17],
+            4: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55],
+        },
+        MESSAGE_TYPE: {
+            INITIALIZE_GAME: 'initialise_game',
+            SKIP: 'skip',
+            VOTE: 'vote',
+            START_TIMER: 'start_timer',
+            JOIN: 'join',
+            LEAVE: 'leave',
         },
         ROUTES: {
             //access whether user is authenticated or not

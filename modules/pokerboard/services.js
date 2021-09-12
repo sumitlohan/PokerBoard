@@ -15,7 +15,7 @@
 
             /**
              * Fetches pokerboard through pokerboard id
-             * @param {*} pokerboardId 
+             * @param {Integer} pokerboardId 
              * @returns pokerboard details
              */
             this.getPokerboardDetails = pokerboardId => {
@@ -24,7 +24,7 @@
 
             /**
              * Creates invite
-             * @param {*} user 
+             * @param {Object} user 
              * @returns invitee details
              */
             this.inviteUser = user => {
@@ -33,7 +33,7 @@
 
             /**
              * Creates invite
-             * @param {*} data 
+             * @param {Object} data 
              * @returns session details
              */
             this.createSession = data => {
