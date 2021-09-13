@@ -69,6 +69,7 @@
                 /* Countdown helper */
                 if ($scope.time == 0) {
                     clearTimeout($scope.timerId);
+                    $scope.estimated = true;
                     // a function to be fired
                 } else {
                     $scope.time--;
