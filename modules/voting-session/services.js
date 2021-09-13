@@ -10,7 +10,7 @@
         ) {
             /**
              * Get game session
-             * @param {*} pokerboardId 
+             * @param {Integer} pokerboardId 
              * @returns session details
              */
             this.getSession = pokerboardId => {
@@ -19,7 +19,7 @@
 
             /**
              * Fetches pokerboard through pokerboard id
-             * @param {*} pokerboardId 
+             * @param {Integer} pokerboardId 
              * @returns pokerboard details
              */
             this.getPokerboardDetails = pokerboardId => {
@@ -28,7 +28,7 @@
 
             /**
              * Fetches JIRA issue from ticketID
-             * @param {*} query
+             * @param {String} query
              * @returns JIRA issue details
              */
             this.getIssue = query => {
@@ -37,7 +37,7 @@
 
             /**
              * Add comment on JIRA issue
-             * @param {*} comment
+             * @param {Object} comment
              * @returns Comment on JIRA
              */
             this.postComment = comment => {
@@ -46,8 +46,8 @@
 
             /**
              * Connect to websocket
-             * @param {*} sessionId
-             * @param {*} token
+             * @param {Integer} sessionId
+             * @param {String} token
              * @returns Connection with websocket
              */
             this.wsConnect = (sessionId, token) => {
