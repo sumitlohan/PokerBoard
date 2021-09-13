@@ -5,11 +5,11 @@
         '$scope', '$rootScope', '$state', 'votingSessionService', '$mdToast', 'APP_CONSTANTS', '$stateParams',
         function ($scope, $rootScope, $state, votingSessionService, $mdToast, APP_CONSTANTS, $stateParams) {
             const pokerboardId = $stateParams.id;
+
             var issueId = undefined;
             $scope.voteList = [];
             const setCards = type => {
                 /* Setting card type */
-                console.log(type);
                 $scope.cardList = APP_CONSTANTS.DECK_TYPE[type];
             };
 
@@ -99,16 +99,6 @@
                 data.forEach(parseUsers);
             };
 
-            const updateVote = (id, estimate) => {
-                /* Updating already voted estimate of user */
-                for (let i = 0; i < $scope.voteList.length; i++) {
-                    if ($scope.voteList[i].id == id) {
-                        $scope.voteList.splice(i, 1);
-                        return;
-                    }
-                }
-            };
-
             const addRealTimeVotedUser = data => {
                 /* Adding user who voted to the list for UI */
                 // updateVote(data.user.id, data.user.estimate);
@@ -184,17 +174,25 @@
                 setUserVote(number);
             };
 
+            const onSession = response => {
+                if (response.status != "IN_PROGRESS") {
+                    $state.go('404-page-not-found');
+                }
+                setSocketConnection(response.id);
+                setIssueDetails(response.ticket.ticket_id);
+            };
+
             const init = () => {
                 /* Initializing function */
-                votingSessionService.getSession(pokerboardId).then(response => {
-                    if (response.status != "IN_PROGRESS") {
+                if(!$stateParams.defaultResponse){
+                    votingSessionService.getSession(pokerboardId).then(response => {
+                        onSession(response);
+                    }, error => {
                         $state.go('404-page-not-found');
-                    }
-                    setSocketConnection(response.id);
-                    setIssueDetails(response.ticket.ticket_id);
-                }, error => {
-                    $state.go('404-page-not-found');
-                });
+                    });
+                }else{
+                    onSession($stateParams.defaultResponse);
+                }
 
                 /* Fetching Pokerboard Details */
                 votingSessionService.getPokerboardDetails(pokerboardId).then(response => {

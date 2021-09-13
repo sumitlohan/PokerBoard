@@ -56,6 +56,9 @@
                     url: "/session/:id",
                     templateUrl: "modules/voting-session/voting-session.html",
                     controller: "votingSessionCtrl",
+                    params: {
+                        defaultResponse: undefined,
+                    }
                 });
 
             $urlRouterProvider.otherwise("/404-page-not-found");

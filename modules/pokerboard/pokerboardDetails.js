@@ -91,7 +91,7 @@
 
             $scope.createSession = ticketId => {
                 pokerboardService.createSession({"ticket": ticketId}).then(response => {
-                    $state.go('voting-session', {id: pokerboardId});
+                    $state.go('voting-session', {id: pokerboardId, defaultResponse: response});
                 }, error => {
                     $mdToast.show($mdToast.simple().textContent(error.data.ticket[0]));
                 });
