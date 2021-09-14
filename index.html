@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="static/css/index.css" />
     <link rel="stylesheet" href="modules/signup/signup.css" />
     <link rel="stylesheet" href="modules/login/login.css" />
+    <link rel="stylesheet" href="node_modules/angularjs-toast/angularjs-toast.css">
     <link rel="stylesheet" href="modules/emailVerification/email-verification.css" />
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/lodash/lodash.js"></script>
@@ -13,13 +14,18 @@
     <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
     <script src="node_modules/angular-messages/angular-messages.js"></script>
     <script src="node_modules/angular-cookies/angular-cookies.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angularjs-toast/angularjs-toast.js"></script>
     <script src="env.js"></script>
     <script src="main/app.js"></script>
     <script src="main/appConfig.js"></script>
     <script src="main/constants.js"></script>
+    <script src="main/appRun.js"></script>
+    <script src="directives/navbar/navbar.js"></script>
     <script src="modules/signup/controller.js"></script>
     <script src="modules/signup/services.js"></script>
-    <script src="directives/matchPass.js"></script>
+    <script src="directives/checkConfirmPass.js"></script>
     <script src="modules/login/services.js"></script>
     <script src="modules/login/controller.js"></script>
     <script src="modules/emailVerification/controller.js"></script>
@@ -28,6 +34,10 @@
   </head>
 
   <body ng-app="pokerPlanner">
+    <div class="loader" ng-show="loading">
+      <div class="spinner-border" class="loader-size" role="status"></div>
+    </div>
+    <nav-bar ng-show="isAuth"></nav-bar>
     <ui-view></ui-view>
   </body>
 

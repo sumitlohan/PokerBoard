@@ -29,8 +29,7 @@
                     $rootScope.isAuth = response.token;
                     $rootScope.user = user;
                     $cookies.put('user', JSON.stringify(user));
-
-                    // TODO: $state.go('pokerboard');
+                    $state.go('pokerboard');
                 }, error => {
                     $scope.errorMsg = error.data.non_field_errors[0];
                 });

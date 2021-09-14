@@ -1,7 +1,7 @@
 <div>
-    <form class="signup-form" name="signupForm">
-        <h2 class="mt-4 mb-4">Signup</h2>
-        <h3>Please enter the details</h3>
+    <form class="signup-form mt-2" name="signupForm">
+        <h1 class="mt-4 mb-4">Poker Planner</h1>
+        <h2 class="mb-4">Signup</h2>
         <div class="form-group signup-field">
             <h6 class="text-danger mt-3 mb-3">* indicates required</h6>
             <label>First Name<span class="text-danger">*</span></label>
@@ -30,10 +30,10 @@
         <p ng-show="signupForm.password.$invalid" class="note">Note: {{ passNote }}</p> 
         <div class="form-group signup-field">
             <label>Confirm Password<span class="text-danger">*</span></label>
-            <input type="password" name="confirmPassword" ng-model="confirmPassword" class="form-control" placeholder="Confirm password" required match-pass="password" >
+            <input type="password" name="confirmPassword" ng-model="confirmPassword" class="form-control" placeholder="Confirm password" required check-confirm-pass="password" >
             <div ng-messages="signupForm.confirmPassword.$error" class="invalid" role="alert">
                 <span ng-show="signupForm.confirmPassword.$touched" ng-message="required">Confirm Password is required!</span> 
-                <span ng-show="signupForm.confirmPassword.$dirty" ng-message="matchPass">Passwords donot match!</span> 
+                <span ng-show="signupForm.confirmPassword.$dirty" ng-message="checkConfirmPass">Passwords donot match!</span> 
             </div>
         </div> 
         <button type="submit" ng-disabled="signupForm.$invalid" ng-click="signup()" class="btn btn-success mt-4 align-self-end">Submit</button>

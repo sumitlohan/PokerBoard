@@ -12,5 +12,15 @@
             PASSWORD_VALIDATION: `Password must be of minimum 8 characters, 
             at least one uppercase letter, lowercase letter, number and special character`,
         },
+        ROUTES: {
+            //access whether user is authenticated or not
+            PUBLIC_ROUTES: ['404-page-not-found', '500-internal-server-error'],
+            //acess only when user is not authenticated
+            UNAUTH_ROUTES: ['login', 'signup']
+        },
+        ERROR_ROUTES: {
+            404: '404-page-not-found',
+            500: '500-internal-server-error',
+        }
     });
 })();
