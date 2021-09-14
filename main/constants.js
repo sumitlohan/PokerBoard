@@ -5,6 +5,8 @@
         API_ENDPOINT: {
             SIGNUP: 'accounts/register',
             LOGIN: 'accounts/login',
+            GROUPS: 'groups/',
+            CREATE_MEMBERS: 'groups/create-members',
             ACCOUNT_ACTIVATE: 'accounts/activate/',
         },
         ERROR_MESSAGES: {

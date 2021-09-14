@@ -30,9 +30,18 @@
 
                 .state('pokerboard', {
                     url: '/',
-                    templateUrl: 'modules/pokerboard/pokerboard.html'
+                    templateUrl: 'modules/pokerboard/pokerboard.html',
                 })
-                
+                .state("groups", {
+                    url: "/groups",
+                    templateUrl: "modules/group/groupList.html",
+                    controller: "groupListCtrl",
+                })
+                .state("group", {
+                    url: "/groups/:id",
+                    templateUrl: "modules/group/groupDetails.html",
+                    controller: "groupDetailsCtrl",
+                })              
                 .state('email-verification', {
                     url: '/activate/:uid/:token',
                     templateUrl: 'modules/emailVerification/email-verification.html',
