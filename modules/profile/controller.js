@@ -1,27 +1,21 @@
 'use strict';
 (function () {
     angular.module('pokerPlanner').controller('profileCtrl', [
-        '$scope', '$rootScope', '$state', '$cookies', 'pokerboardService', '$mdToast', 'groupService',
+        '$scope', '$rootScope', '$state', '$cookies', '$mdToast', 'groupService', 'pokerboardService',
         'profileService', 'APP_CONSTANTS',
         function (
-            $scope, $rootScope, $state, $cookies, pokerboardService, $mdToast, groupService, profileService,
+            $scope, $rootScope, $state, $cookies, $mdToast, groupService, pokerboardService, profileService,
             APP_CONSTANTS,
         ) {
-            const user = JSON.parse($cookies.get('user') || ("{}"));
             $scope.passNote = APP_CONSTANTS.ERROR_MESSAGES.PASSWORD_VALIDATION;
             $scope.votes = [];
             const init = function () {
-                profileService.getUser(user.id).then(response => {
-                    $scope.email = response.email;
-                    $scope.firstname = response.first_name;
-                    $scope.lastname = response.last_name;
-                });
+                $scope.email = $rootScope.user.email;
+                $scope.firstname = $rootScope.user.first_name;
+                $scope.lastname = $rootScope.user.last_name;
 
                 profileService.getVotes().then(response => {
                     $scope.votes = response;
-                    console.log(response);
-                }).catch(err => {
-                    console.log(err);
                 });
 
                 pokerboardService.getPokerboards().then(response => {
@@ -36,7 +30,7 @@
                     response.forEach(parse);
                 });
 
-                groupService.getGroups().then(response => {
+                groupService.getGroupsList().then(response => {
                     $scope.groupList = [];
                     const parse = ele => {
                         $scope.groupList.push({
@@ -45,15 +39,15 @@
                         });
                     }
                     response.forEach(parse);
-                }, err => { })
+                });
             };
 
             init();
 
             $scope.onSubmit = () => {
                 /* User is trying to change password or other data */
-                const data = $scope.password == undefined ? { first_name: $scope.firstname, last_name: $scope.lastname } : { first_name: $scope.firstname, last_name: $scope.lastname, password: $scope.password };
-                profileService.updateUser(user.id, data).then(response => {
+                const data = !$scope.password ? { first_name: $scope.firstname, last_name: $scope.lastname } : { first_name: $scope.firstname, last_name: $scope.lastname, password: CryptoJS.SHA256($scope.password).toString()};
+                profileService.updateUser($rootScope.user.id, data).then(response => {
                     $mdToast.show($mdToast.simple().textContent("Profile Update Successful"));
                 }, error => {
                     $scope.errorMsg = error.data.password[0];
