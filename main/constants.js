@@ -6,6 +6,8 @@
             SIGNUP: 'accounts/register',
             LOGIN: 'accounts/login',
             USER_PROFILE: 'accounts/user/',
+            GROUPS: 'groups/',
+            CREATE_MEMBERS: 'groups/create-members',
             ACCOUNT_ACTIVATE: 'accounts/activate/',
         },
         ERROR_MESSAGES: {

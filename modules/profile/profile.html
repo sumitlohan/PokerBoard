@@ -1,4 +1,4 @@
-<div class="mb-5 mt-5 main-cont">
+<div class="mt-5 back-univ main-cont mb-4">
     <!-- Edit profile section -->
     <div class="back-cont">
         <h5 class="text-center mb-3">Edit Profile</h5>
@@ -80,5 +80,13 @@
                 </tr>
             </table>
         </div>
+    </div>
+    <div ng-show="votes.length > 0" class="mb-4">
+        <div class="tab-head">
+            <p>ESTIMATED TICKETS</p>
+        </div>
+        <li style="width: fit-content;" class="mx-1 bg-primary d-inline badge" ng-repeat="ticket in votes">
+            <span>{{ ticket.ticket_id }} : {{ticket.estimate}}</span>
+        </li>
     </div>
 </div>

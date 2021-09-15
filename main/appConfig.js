@@ -37,16 +37,27 @@
                 .state('pokerboard', {
                     url: '/',
                     templateUrl: 'modules/pokerboard/pokerboard.html',
-                    controller: 'pokerboardCtrl'
                 })
-                
+
+                .state("groups", {
+                    url: "/groups",
+                    templateUrl: "modules/group/groupList.html",
+                    controller: "groupListCtrl",
+                })
+
+                .state("group", {
+                    url: "/groups/:id",
+                    templateUrl: "modules/group/groupDetails.html",
+                    controller: "groupDetailsCtrl",
+                })             
+                 
                 .state('email-verification', {
                     url: '/activate/:uid/:token',
                     templateUrl: 'modules/emailVerification/email-verification.html',
                     controller: 'emailVerificationCtrl'
                 });
 
-            // $urlRouterProvider.otherwise("/404-page-not-found");
+            $urlRouterProvider.otherwise("/404-page-not-found");
             
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);
         }   
