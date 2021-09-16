@@ -24,13 +24,5 @@
             this.updateUser = function (id, data) {
                 return Restangular.one(APP_CONSTANTS.API_ENDPOINT.USER_PROFILE, id).customPATCH(data);
             };
-
-            /**
-             * Fetches votes of user
-             * @returns user votes
-             */
-            this.getVotes = () => {
-                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.GET_USER_VOTES).get();
-            }
         }]);
 })();
