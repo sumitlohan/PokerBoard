@@ -10,7 +10,7 @@
              * @param {integer} id 
              */
             $scope.goToPokerboard = id => {
-                $state.go('pokerboard-details', {"id": id});
+                $state.go('pokerboard-details', { "id": id });
             }
 
             const init = () => {
@@ -30,7 +30,7 @@
             };
 
             init();
-                
+
             $scope.redirect = function () {
                 $state.go('create-game');
             };

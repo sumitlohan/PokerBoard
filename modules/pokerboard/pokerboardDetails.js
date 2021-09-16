@@ -5,7 +5,6 @@
         function ($state, $scope, $stateParams, pokerboardService, APP_CONSTANTS) {
             
             $scope.pokerboard = {};
-            const pokerboardId = $stateParams.id;
             $scope.email = "";
             $scope.emailInviteForm = true;
             $scope.showUserError = false;
@@ -36,10 +35,12 @@
              * Fetch details of the pokerboard
              */
             const init = () => {
-                pokerboardService.getPokerboardDetails(pokerboardId).then(response => {
+                pokerboardService.getPokerboardDetails($stateParams.id).then(response => {
+                    console.log(response);
                     $scope.pokerboard = response;
                 }, error => {
-                    $state.go('404-page-not-found');
+                    console.log(error);
+                    // $state.go('404-page-not-found');
                 })
             }
             init();
@@ -72,7 +73,7 @@
                 const user = {
                     type: ($scope.emailInviteForm) ? 1 : 2,
                     invitee: ($scope.emailInviteForm) ? $scope.email : null,
-                    pokerboard: pokerboardId,
+                    pokerboard: $stateParams.id,
                     group_name: ($scope.emailInviteForm) ? null : $scope.group,
                     role: $scope.role
                 }
@@ -94,5 +95,14 @@
                     }
                 });
             }
+
+            $scope.createSession = ticketId => {
+                pokerboardService.createSession({"ticket": ticketId}).then(response => {
+                    $state.go('voting-session', {id: $stateParams.id, defaultResponse: response});
+                }, error => {
+                    $mdToast.show($mdToast.simple().textContent(error.data.ticket[0]));
+                });
+            }
+
         }]);
 })();

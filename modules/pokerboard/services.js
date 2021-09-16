@@ -5,15 +5,15 @@
      */
     angular.module("pokerPlanner").service('pokerboardService', [
         'Restangular', 'APP_CONSTANTS',
-        
-        function(
+
+        function (
             Restangular, APP_CONSTANTS
         ) {
             /**
-             * Get pokerboard list 
+             * Get pokerboard list
              * @returns pokerboard list
              */
-            this.getPokerboards = function(){
+            this.getPokerboards = function () {
                 return Restangular.one(APP_CONSTANTS.API_ENDPOINT.POKERBOARD).get();
             }
 
@@ -36,6 +36,15 @@
             }
 
             /**
+             * Creates session
+             * @param {Object} data 
+             * @returns session details
+             */
+            this.createSession = data => {
+                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.GAME_SESSION).post(data);
+            }
+
+            /**
              * Changes order of tickets
              * @param {object} tickets 
              * @param {integer} pokerboardId 
@@ -44,14 +53,5 @@
             this.orderTickets = (tickets, pokerboardId) => {
                 return Restangular.one(`pokerboards/${pokerboardId}/order-tickets`).customPUT(tickets);
             }
-
-            /**
-             * Creates session
-             * @param {*} data 
-             * @returns session details
-             */
-            this.createSession = data => {
-                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.GAME_SESSION).post(data);
-            }
-    }]); 
+        }]);
 })();

@@ -9,6 +9,7 @@
             $scope, $rootScope, $state, $cookies, signupService, APP_CONSTANTS
         ) {
             $scope.showError = false;
+            $rootScope.signedUp = false;
             $scope.passNote = APP_CONSTANTS.ERROR_MESSAGES.PASSWORD_VALIDATION;
 
             /**
@@ -27,6 +28,7 @@
                 }
 
                 signupService.createUser(user).then(response => {
+                    $rootScope.signedUp = true;
                     $scope.goToLogin();
                 }, error => {
                     if(error.status === 404)

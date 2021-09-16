@@ -70,6 +70,15 @@
                     controller: 'emailVerificationCtrl'
                 })
 
+                .state('voting-session', {
+                    url: "/session/:id",
+                    templateUrl: "modules/voting-session/voting-session.html",
+                    controller: "votingSessionCtrl",
+                    params: {
+                        defaultResponse: undefined,
+                    }
+                })
+                
                 .state('invite-acception', {
                     url: '/join/:invite_id',
                     templateUrl: 'modules/invite-acception/inviteAcception.html',
