@@ -46,6 +46,12 @@
                     controller: 'createGameCtrl'
                 })
 
+                .state('pokerboard-details', {
+                    url: "/pokerboard/:id",
+                    templateUrl: "modules/pokerboard/pokerboardDetails.html",
+                    controller: "pokerboardDetailsCtrl",
+                })
+                
                 .state("groups", {
                     url: "/groups",
                     templateUrl: "modules/group/groupList.html",
@@ -56,8 +62,8 @@
                     url: "/groups/:id",
                     templateUrl: "modules/group/groupDetails.html",
                     controller: "groupDetailsCtrl",
-                })     
-                 
+                })              
+                
                 .state('email-verification', {
                     url: '/activate/:uid/:token',
                     templateUrl: 'modules/emailVerification/email-verification.html',

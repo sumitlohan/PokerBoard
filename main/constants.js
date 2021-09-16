@@ -8,6 +8,7 @@
             POKERBOARD: 'pokerboards/',
             SUGGESTIONS: 'pokerboards/suggestions',
             JQL: 'pokerboards/jql',
+            MEMBERS: 'pokerboards/members',
             USER_PROFILE: 'accounts/user/',
             GROUPS: 'groups/',
             CREATE_MEMBERS: 'groups/create-members',
@@ -16,6 +17,10 @@
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',
             INVALID_JQL: 'Invalid JQL Query',
+            USER_ALREADY_INVITED: 'User already invited',
+            GROUP_ALREADY_INVITED: 'Group already invited',
+            GROUP_DOES_NOT_EXIST: 'Group does not exist',
+            LEAST_TICKET: 'Please import atleast one ticket.',
             PASSWORD_VALIDATION: `Password must be of minimum 8 characters, 
             at least one uppercase letter, lowercase letter, number and special character`,
         },

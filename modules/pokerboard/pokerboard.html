@@ -16,7 +16,7 @@
             <p>{{ board.state }}</p>
             <p>{{ board.date }}</p>
             <p>{{ board.creator }}</p>
-            <button class="join-btn bg-dark">Join</button>
+            <button class="join-btn bg-dark" ng-click="goToPokerboard(board.id)">Join</button>
         </div>
         <div class="hor-rule"></div>
     </div>
