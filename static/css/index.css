@@ -17,3 +17,8 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.loader-size {
+    width: 4rem;
+    height: 4rem;
+}

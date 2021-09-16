@@ -12,7 +12,6 @@
             $rootScope.isAuth = false;
             $state.go("login");
         }
-        
         /**
          * Executes before every transition
          */
@@ -55,7 +54,7 @@
          * Executes if successful response is received
          */
         Restangular.addResponseInterceptor((data, operation, what, url, response, deferred) => {
-            $rootScope.loading = false;
+            $rootScope.loading = false;           
             return data;
         });
 

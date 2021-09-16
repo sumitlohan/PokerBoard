@@ -6,7 +6,7 @@
         function ($scope, $rootScope, $state, votingSessionService, $mdToast, APP_CONSTANTS, $stateParams) {
             const pokerboardId = $stateParams.id;
 
-            var issueId = undefined;
+            let issueId;
             $scope.voteList = [];
             const setCards = type => {
                 /* Setting card type */
@@ -23,6 +23,21 @@
                     $scope.labelList = response.issues[0].fields.labels;
                 }, error => {
                     $state.go('404-page-not-found');
+                });
+            };
+
+            $scope.getComments = () => {
+                /* Getting comment on JIRA */
+                votingSessionService.getComments(issueId).then(response => {
+                    $scope.comments = response.map(obj => {
+                        return {
+                            author: obj.author.displayName,
+                            created: new Date(obj.created).toLocaleString(),
+                            body: obj.body
+                        }
+                    });
+                }, error => {
+                    $mdToast.show($mdToast.simple().textContent(APP_CONSTANTS.ERROR_MESSAGES.COMMENT_GET_FAILED));
                 });
             };
 
@@ -53,28 +68,37 @@
                 $scope.websocket.send(data);
             };
 
-            const setCountdown = timer => {
-                /* Setting up countdown timer */
-                $scope.time = 0;
-                if (timer == "null") {
-                    return;
-                }
-                let startTime = new Date(timer);
-                let currentTime = new Date();
-                $scope.timerId = setInterval(countdown, 1000);
-                $scope.time = Math.round($scope.duration - (currentTime - startTime) / 1000);
-            };
-
             const countdown = () => {
                 /* Countdown helper */
                 if ($scope.time == 0) {
-                    clearTimeout($scope.timerId);
+                    clearInterval($scope.timerId);
                     $scope.estimated = true;
-                    // a function to be fired
+                    console.log("Trigger Event");
+                    $scope.$apply();
+                    return;
                 } else {
                     $scope.time--;
                 }
                 $scope.$apply();
+            };
+
+            const setCountdown = timer => {
+                /* Setting up countdown timer */
+                $scope.time = 0;
+                if (timer === "null") {
+                    return;
+                }
+                let startTime = new Date(timer);
+                let currentTime = new Date();
+                $scope.time = Math.round($scope.duration - (currentTime - startTime) / 1000);
+                if ($scope.time <= 0) {
+                    clearInterval($scope.timerId);
+                    $scope.time = 0;
+                    $scope.estimated = true;
+                    $scope.$apply();
+                    return;
+                }
+                $scope.timerId = setInterval(countdown, 1000);
             };
 
             const initializeGame = data => {
@@ -92,7 +116,7 @@
                 /* Updating Participants in UI */
                 $scope.participantList = [];
                 const parseUsers = ele => {
-                    var name = ele.first_name + " " + ele.last_name;
+                    let name = ele.first_name + " " + ele.last_name;
                     if (!$scope.participantList.includes(name)) {
                         $scope.participantList.push(name);
                     }
@@ -104,9 +128,9 @@
                 /* Adding user who voted to the list for UI */
                 // updateVote(data.user.id, data.user.estimate);
                 $scope.voteList = $scope.voteList.filter(ele => ele.id != data.user.id);
-                var first_name = data.user.first_name;
-                var last_name = data.user.last_name;
-                if (data.user.id == $rootScope.user.id) {
+                let first_name = data.user.first_name;
+                let last_name = data.user.last_name;
+                if (data.user.id === $rootScope.user.id) {
                     elevateCard($scope.cardList.indexOf(data.estimate));
                 }
                 $scope.voteList.push(
@@ -139,6 +163,8 @@
                             break;
                         case APP_CONSTANTS.MESSAGE_TYPE.START_TIMER: setCountdown(obj.timer_started_at);
                             break;
+                        case APP_CONSTANTS.MESSAGE_TYPE.ESTIMATE: $state.go('pokerboard-details', { id: pokerboardId });
+                            break;
                         case APP_CONSTANTS.MESSAGE_TYPE.JOIN:
                         case APP_CONSTANTS.MESSAGE_TYPE.LEAVE: updateParticipants(obj.users);
                             break;
@@ -159,16 +185,14 @@
 
             const elevateCard = id => {
                 /* Highlighting current user's voted card */
-                if (!$scope.prevCard) {
-                    document.getElementById("card" + $scope.prevCard).classList.remove("selected-card");
-                }
+                if ($scope.prevCard != undefined) document.getElementById("card" + $scope.prevCard).classList.remove("selected-card");
                 document.getElementById("card" + id).classList.add("selected-card");
                 $scope.prevCard = id;
             };
 
             $scope.setEstimate = function (number, id) {
                 /* Card click function */
-                if ($scope.prevCard == id) {
+                if ($scope.prevCard === id) {
                     return;
                 }
                 elevateCard(id);
@@ -176,7 +200,7 @@
             };
 
             const onSession = response => {
-                if (response.status != "IN_PROGRESS") {
+                if (response.status != 1) {
                     $state.go('404-page-not-found');
                 }
                 setSocketConnection(response.id);
@@ -185,19 +209,19 @@
 
             const init = () => {
                 /* Initializing function */
-                if(!$stateParams.defaultResponse){
+                if (!$stateParams.defaultResponse) {
                     votingSessionService.getSession(pokerboardId).then(response => {
                         onSession(response);
                     }, error => {
                         $state.go('404-page-not-found');
                     });
-                }else{
+                } else {
                     onSession($stateParams.defaultResponse);
                 }
 
                 /* Fetching Pokerboard Details */
                 votingSessionService.getPokerboardDetails(pokerboardId).then(response => {
-                    $scope.isAdmin = response.manager.id == $rootScope.user.id;
+                    $scope.isAdmin = response.manager.id === $rootScope.user.id;
                     $scope.duration = response.duration;
                     $scope.title = response.title;
                     $scope.description = response.description;

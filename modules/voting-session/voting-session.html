@@ -5,7 +5,30 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+<<<<<<< HEAD
                     <h5 class="modal-title" id="showCommentsModalLabel">Add Comment</h5>
+=======
+                    <h5 class="modal-title" id="showCommentsModalLabel">All Comments</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div ng-repeat="comment in comments">
+                        <small class="text-secondary">{{comment.author}} {{comment.created}}</small>
+                        <p>{{comment.body}}</p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="postCommentsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postCommentsModalLabel">Add Comment</h5>
+>>>>>>> 6c2ab89912486af3ac632ebe1d1547818ff88623
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -38,9 +61,11 @@
             <div class="hr-line"></div>
             <div class="flex move-right mt-2">
                 <button title="Add comment" ng-click="sendMessage()" data-bs-toggle="modal"
-                    data-bs-target="#showCommentsModal" class="btn-dim btn-dark mr-15"><i
+                    data-bs-target="#postCommentsModal" class="btn-dim btn-dark mr-15"><i
                         class="fa fa-plus"></i></button>
-                <button title="Show comments" class="btn-dim btn-dark mr-15"><i class="fa fa-comments"></i></button>
+                <button title="Show comments" ng-click="getComments()" data-bs-toggle="modal"
+                    data-bs-target="#showCommentsModal" class="btn-dim btn-dark mr-15"><i
+                        class="fa fa-comments"></i></button>
             </div>
             <p class="mt-3">{{issueDescription}}</p>
             <div class="flex">

@@ -84,3 +84,7 @@ a {
     color: black;
     text-decoration: none;
 }
+
+.margin-right {
+    margin-right: 5px;
+}

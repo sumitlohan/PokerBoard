@@ -28,6 +28,12 @@
                     controller: 'loginCtrl'
                 })
 
+                .state('profile', {
+                    url: '/profile',
+                    templateUrl: 'modules/profile/profile.html',
+                    controller: 'profileCtrl'
+                })
+
                 .state('pokerboard', {
                     url: '/',
                     templateUrl: 'modules/pokerboard/pokerboard.html',
@@ -46,6 +52,18 @@
                     controller: "pokerboardDetailsCtrl",
                 })
                 
+                .state("groups", {
+                    url: "/groups",
+                    templateUrl: "modules/group/groupList.html",
+                    controller: "groupListCtrl",
+                })
+
+                .state("group", {
+                    url: "/groups/:id",
+                    templateUrl: "modules/group/groupDetails.html",
+                    controller: "groupDetailsCtrl",
+                })              
+                
                 .state('email-verification', {
                     url: '/activate/:uid/:token',
                     templateUrl: 'modules/emailVerification/email-verification.html',
@@ -59,8 +77,20 @@
                     params: {
                         defaultResponse: undefined,
                     }
-                });
+                })
+                
+                .state('invite-acception', {
+                    url: '/join/:invite_id',
+                    templateUrl: 'modules/invite-acception/inviteAcception.html',
+                    controller: 'invitationCtrl'
+                })
 
+                .state('pokerboard-members', {
+                    url: '/pokerboard/:pid/members',
+                    templateUrl: 'modules/pokerboard-members/pokerboardMembers.html',
+                    controller: 'pokerboardMembersCtrl'
+                });
+                
             $urlRouterProvider.otherwise("/404-page-not-found");
             
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);

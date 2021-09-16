@@ -1,15 +1,21 @@
 'use strict';
 (function () {
     angular.module('pokerPlanner').controller('pokerboardDetailsCtrl', [
-        '$state', '$scope', '$stateParams', 'pokerboardService', 'APP_CONSTANTS', '$mdToast',
-        function ($state, $scope, $stateParams, pokerboardService, APP_CONSTANTS, $mdToast) {
-
+        '$state', '$scope', '$stateParams', 'pokerboardService', 'APP_CONSTANTS',
+        function ($state, $scope, $stateParams, pokerboardService, APP_CONSTANTS) {
+            
             $scope.pokerboard = {};
-            const pokerboardId = $stateParams.id;
             $scope.email = "";
             $scope.emailInviteForm = true;
             $scope.showUserError = false;
             $scope.showGroupError = false;
+            
+            /**
+             * Redirects to pokerboard's members page
+             */
+            $scope.goToMembers = () => {
+                $state.go('pokerboard-members', {"pid": pokerboardId});
+            }
 
             /**
              * Shows form to invite through email
@@ -24,15 +30,17 @@
             $scope.showGroupForm = () => {
                 $scope.emailInviteForm = false;
             }
-
+            
             /**
              * Fetch details of the pokerboard
              */
             const init = () => {
-                pokerboardService.getPokerboardDetails(pokerboardId).then(response => {
+                pokerboardService.getPokerboardDetails($stateParams.id).then(response => {
+                    console.log(response);
                     $scope.pokerboard = response;
                 }, error => {
-                    $state.go('404-page-not-found');
+                    console.log(error);
+                    // $state.go('404-page-not-found');
                 })
             }
             init();
@@ -63,16 +71,15 @@
              */
             $scope.inviteUser = () => {
                 const user = {
+                    type: ($scope.emailInviteForm) ? 1 : 2,
                     invitee: ($scope.emailInviteForm) ? $scope.email : null,
-                    pokerboard: pokerboardId,
+                    pokerboard: $stateParams.id,
                     group_name: ($scope.emailInviteForm) ? null : $scope.group,
                     role: $scope.role
                 }
-                /**
-                 * Creates invites and checks for errors, if encountered
-                 */
+                // Creates invites and checks for errors, if encountered
                 pokerboardService.inviteUser(user).then(response => {
-                    // $scope.pokerboard.invites = [...$scope.pokerboard.invites, {user: response.user}]
+                        // User invited
                 }, error => {
                     if (error.data.non_field_errors[0] === APP_CONSTANTS.ERROR_MESSAGES.USER_ALREADY_INVITED) {
                         $scope.existingInvite = $scope.email;
@@ -91,7 +98,7 @@
 
             $scope.createSession = ticketId => {
                 pokerboardService.createSession({"ticket": ticketId}).then(response => {
-                    $state.go('voting-session', {id: pokerboardId, defaultResponse: response});
+                    $state.go('voting-session', {id: $stateParams.id, defaultResponse: response});
                 }, error => {
                     $mdToast.show($mdToast.simple().textContent(error.data.ticket[0]));
                 });

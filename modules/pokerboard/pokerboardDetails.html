@@ -1,10 +1,14 @@
 <div class="m-2">
-    <div class=" m-2 d-flex justify-content-between">
-        <h2>{{ pokerboard.title }}</h2>
-        <button data-bs-toggle="modal" data-bs-target="#inviteUserModal" ng-show="user.id==pokerboard.manager.id"
-            class="btn btn-success">Invite user</button>
+    <div class="m-2 d-flex justify-content-between">
+        <div>
+            <h2>{{ pokerboard.title }}</h2>
+        </div>
+        <div>
+            <button class="btn btn-secondary bg-dark" ng-click="goToMembers()">Members</button>
+            <button data-bs-toggle="modal" data-bs-target="#inviteUserModal" ng-show="user.id==pokerboard.manager.id"
+                class="btn btn-success">Invite user</button>
+        </div> 
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="inviteUserModal" tabindex="-1" aria-labelledby="inviteUserModalLabel"
         aria-hidden="true">
@@ -68,17 +72,28 @@
         <div>
             <div class="tab-head">
                 <p>TICKET ID</p>
+                <p>SUMMARY</p>
             </div>
             <div class="hor-rule"></div>
         </div>
         <div ng-repeat="ticket in pokerboard.tickets">
             <div class="tab-content">
                 <p>{{ ticket.ticket_id }}</p>
-                <button ng-click="createSession(ticket.id)" class="join-btn bg-dark">Estimate</button>
-                <button class="btn-delete bg-dark"><i class="bi bi-arrow-up"></i></button>
-                <button class="btn-delete bg-dark"><i class="bi bi-arrow-down"></i></button>
+                <p class="w-50">{{ ticket.summary }}</p>
+                <button ng-show="user.id==pokerboard.manager.id" class="join-btn bg-dark">Estimate</button>
+                <button ng-show="user.id==pokerboard.manager.id" ng-click="moveUp($index)" class="btn-delete bg-dark mx-1"><i class="bi bi-arrow-up"></i></button>
+                <button ng-show="user.id==pokerboard.manager.id" ng-click="moveDown($index)" class="btn-delete bg-dark mx-1"><i class="bi bi-arrow-down"></i></button>
             </div>
             <div class="hor-rule"></div>
+        </div>
+        <div ng-show="isEditing" class="my-3 d-flex justify-content-end">
+            <button class="m-1 btn btn-secondary" ng-click="cancelOrdering()">Cancel</button>
+            <button class="m-1 btn btn-success" ng-click="saveOrdering()">Save</button>
+        </div>
+        <div class="my-4">
+            <div class="tab-head">
+                <p>ESTIMATED TICKETS</p>
+            </div>
         </div>
     </div>
 </div>
