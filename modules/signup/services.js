@@ -4,7 +4,7 @@
      * Creates user and returns details of user(first_name, last_name, email) 
      * and token
      */
-    angular.module("pokerPlanner").service('signupService', [
+    angular.module("pokerPlanner").service ('signupService', [
         'Restangular', 'APP_CONSTANTS',
         function (Restangular, APP_CONSTANTS) {
             this.createUser = user => {

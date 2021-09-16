@@ -23,7 +23,7 @@
                     first_name: $scope.firstName,
                     last_name: $scope.lastName,
                     email: $scope.email,
-                    password: $scope.password
+                    password: CryptoJS.SHA256($scope.password).toString(),
                 }
 
                 signupService.createUser(user).then(response => {
