@@ -1,0 +1,26 @@
+<div class="main-outer">
+    <h4 class="main-heading" ng-click="goToMembers()">Members</h4>
+    <div>
+        <div class="tab-head">
+            <p>INVITEE</p>
+            <p>GROUP NAME</p>
+            <p>ROLE</p>
+        </div>
+        <div class="hor-rule"></div>
+    </div>
+    <div class="tab-content">
+        <p>{{ pokerboard.manager.email }}</p>
+        <p>-</p>
+        <p>Manager</p>
+    </div>
+    <div class="hor-rule"></div>
+    <div ng-repeat="member in members">
+        <div class="tab-content">
+            <p>{{ member.invitee }}</p>
+            <p>{{ member.group_name }}</p>
+            <p>{{ member.role }}</p>
+            <button class="join-btn bg-danger" ng-show="isManager" ng-click="removeMember(member.id)"><i class="fa fa-trash"></i></button>
+        </div>
+        <div class="hor-rule"></div>
+    </div>
+</div>

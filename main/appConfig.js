@@ -74,6 +74,12 @@
                     url: '/join/:invite_id',
                     templateUrl: 'modules/invite-acception/inviteAcception.html',
                     controller: 'invitationCtrl'
+                })
+
+                .state('pokerboard-members', {
+                    url: '/pokerboard/:pid/members',
+                    templateUrl: 'modules/pokerboard-members/pokerboardMembers.html',
+                    controller: 'pokerboardMembersCtrl'
                 });
                 
             $urlRouterProvider.otherwise("/404-page-not-found");

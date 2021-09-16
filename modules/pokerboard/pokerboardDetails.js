@@ -10,6 +10,13 @@
             $scope.emailInviteForm = true;
             $scope.showUserError = false;
             $scope.showGroupError = false;
+            
+            /**
+             * Redirects to pokerboard's members page
+             */
+            $scope.goToMembers = () => {
+                $state.go('pokerboard-members', {"pid": pokerboardId});
+            }
 
             /**
              * Shows form to invite through email
@@ -24,52 +31,6 @@
             $scope.showGroupForm = () => {
                 $scope.emailInviteForm = false;
             }
-            
-            $scope.moveDown = (idx) => {
-                const tickets = [...$scope.pokerboard.tickets];
-                if(idx!=tickets.length-1){
-                    let temp = tickets[idx];
-                    tickets[idx] = tickets[idx+1];
-                    tickets[idx+1] = temp;
-                    if(!$scope.isEditing){
-                        $scope.isEditing = true;
-                        $scope.prevOrder = $scope.pokerboard.tickets;
-                    }
-                    $scope.pokerboard.tickets = tickets;
-                }
-            }
-
-            $scope.moveUp = (idx) => {
-                const tickets = [...$scope.pokerboard.tickets];
-                if(idx!=0){
-                    let temp = tickets[idx];
-                    tickets[idx] = tickets[idx-1];
-                    tickets[idx-1] = temp;
-                    if(!$scope.isEditing){
-                        $scope.isEditing = true;
-                    }
-                    if(!$scope.isEditing){
-                        $scope.isEditing = true;
-                        $scope.prevOrder = $scope.pokerboard.tickets;
-                    }
-                    $scope.pokerboard.tickets = tickets;
-                }
-            }
-
-            $scope.saveOrdering = () => {
-                const tickets = [...$scope.pokerboard.tickets].map((ticket, idx)=>{
-                    ticket.rank = idx+1;
-                    return ticket;
-                })
-                pokerboardService.orderTickets(tickets, $scope.pokerboard.id);
-                $scope.isEditing = false;
-            }
-
-            $scope.cancelOrdering = () => {
-                $scope.pokerboard.tickets = $scope.prevOrder;
-                $scope.isEditing = false;
-            }
-
             
             /**
              * Fetch details of the pokerboard

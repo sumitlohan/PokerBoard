@@ -44,5 +44,14 @@
             this.orderTickets = (tickets, pokerboardId) => {
                 return Restangular.one(`pokerboards/${pokerboardId}/order-tickets`).customPUT(tickets);
             }
+
+            /**
+             * Creates session
+             * @param {*} data 
+             * @returns session details
+             */
+            this.createSession = data => {
+                return Restangular.all(APP_CONSTANTS.API_ENDPOINT.GAME_SESSION).post(data);
+            }
     }]); 
 })();

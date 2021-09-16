@@ -57,6 +57,10 @@
             1: 'Created',
             2: 'Started',
             3: 'Ended',
+        },
+        MEMBER_ROLE: {
+            1: 'Spectator',
+            2: 'Contributor'
         }
     });
 })();
