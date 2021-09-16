@@ -68,8 +68,14 @@
                     url: '/activate/:uid/:token',
                     templateUrl: 'modules/emailVerification/email-verification.html',
                     controller: 'emailVerificationCtrl'
-                });
+                })
 
+                .state('invite-acception', {
+                    url: '/join/:invite_id',
+                    templateUrl: 'modules/invite-acception/inviteAcception.html',
+                    controller: 'invitationCtrl'
+                });
+                
             $urlRouterProvider.otherwise("/404-page-not-found");
             
             RestangularProvider.setBaseUrl(APP_CONSTANTS.BASE_URL);
