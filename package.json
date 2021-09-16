@@ -29,7 +29,7 @@
     "angularjs-toast": "^4.0.1",
     "bootstrap": "^5.1.0",
     "crypto-js": "^4.1.1",
-    "pbkdf2-sha256": "^1.1.1",
+    "font-awesome": "^4.7.0",
     "restangular": "^1.6.1"
   }
 }

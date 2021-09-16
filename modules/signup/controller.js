@@ -27,8 +27,10 @@
                 }
 
                 signupService.createUser(user).then(response => {
+                    console.log(response);
                     $scope.goToLogin();
                 }, error => {
+                    console.log(error);
                     if(error.status === 404)
                         $state.go('404-page-not-found');
                     else if(error.status === 500)
