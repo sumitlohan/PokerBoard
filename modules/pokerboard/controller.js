@@ -5,19 +5,31 @@
         function (
             $scope, $rootScope, $state, $cookies, pokerboardService, APP_CONSTANTS
         ) {
-            pokerboardService.getPokerboards().then(response => {
-                $scope.boardList = [];
-                response.forEach(parse);
-                function parse(ele) {
-                    $scope.boardList.push({
-                        id: ele.id,
-                        title: ele.title,
-                        state: APP_CONSTANTS.POKERBOARD_STATUS[ele.status],
-                        date: new Date(ele.created_at).toLocaleDateString(),
-                        creator: ele.manager.first_name + " " + ele.manager.last_name,
-                    });
-                }
-            });
+            /**
+             * Redirects to pokerboard details
+             * @param {integer} id 
+             */
+            $scope.goToPokerboard = id => {
+                $state.go('pokerboard-details', { "id": id });
+            }
+
+            const init = () => {
+                pokerboardService.getPokerboards().then(response => {
+                    $scope.boardList = [];
+                    const parse = ele => {
+                        $scope.boardList.push({
+                            id: ele.id,
+                            title: ele.title,
+                            state: APP_CONSTANTS.POKERBOARD_STATUS[ele.status],
+                            date: new Date(ele.created_at).toLocaleDateString(),
+                            creator: ele.manager.first_name + " " + ele.manager.last_name,
+                        });
+                    }
+                    response.forEach(parse);
+                });
+            };
+
+            init();
 
             $scope.redirect = function () {
                 $state.go('create-game');

@@ -1,23 +1,23 @@
 <div class="main-outer">
     <h4 class="main-heading">Recent Planning Poker Games</h4>
     <button ng-click="redirect()" class="new-btn bg-dark"><i class="ic-plus fa fa-plus"></i>New Game</button>
-    <div>
+    <p class="mt-4 main-heading" ng-show="boardList.length==0">You have not created any pokerboards yet</p>
+    <div ng-show="boardList.length">
         <div class="tab-head">
             <p>TITLE</p>
-            <P>STATE</P>
-            <P>DATE</P>
-            <P>CREATOR</P>
+            <p>STATE</p>
+            <p>DATE</p>
+            <p>CREATOR</p>
         </div>
         <div class="hor-rule"></div>
     </div>
     <div ng-repeat="board in boardList">
         <div class="tab-content">
-            <p><a href="#!/pokerboard/{{board.id}}">{{ board.title }}</a></p>
-            <P>{{ board.state }}</P>
-            <P>{{ board.date }}</P>
-            <P>{{ board.creator }}</P>
-            <button class="join-btn bg-dark">Join</button>
-            <button class="btn-delete bg-dark"><i class="fa fa-trash"></i></button>
+            <p>{{ board.title }}</p>
+            <p>{{ board.state }}</p>
+            <p>{{ board.date }}</p>
+            <p>{{ board.creator }}</p>
+            <button class="join-btn bg-dark" ng-click="goToPokerboard(board.id)">Join</button>
         </div>
         <div class="hor-rule"></div>
     </div>

@@ -17,7 +17,8 @@
 
             $scope.onSubmit = () => {
                 /* Atempt to login with given credentials */
-                loginService.getUser({ email: $scope.email, password: $scope.password }).then(response => {
+                const hashPass = CryptoJS.SHA256($scope.password).toString();
+                loginService.getUser({ email: $scope.email, password: hashPass}).then(response => {
                     $scope.errorMsg = undefined;
                     const user = {
                         token: response.token,
@@ -27,15 +28,6 @@
                         email: response.email
                     }
                     $rootScope.isAuth = response.token;
-                    $rootScope.user = user;
-                    $cookies.put('user', JSON.stringify(user));
-                    $state.go('pokerboard');
-
-                }, error => {
-                    if(error.status === 400) {
-                        $scope.isError = true;
-                        $scope.errorMsg = "Invalid Email or Password"
-                    }
                     $rootScope.user = user;
                     $cookies.put('user', JSON.stringify(user));
                     $state.go('pokerboard');

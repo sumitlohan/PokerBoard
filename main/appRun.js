@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-    angular.module("pokerPlanner").run(($rootScope, $state, $cookies, $transitions, Restangular, APP_CONSTANTS) => {
+    angular.module("pokerPlanner").run(($rootScope, $state, $cookies, $transitions, $mdToast, Restangular, APP_CONSTANTS) => {
         const user = JSON.parse($cookies.get('user') || ("{}"));
         $rootScope.user = user;
         const token = user?.token;
@@ -12,7 +12,7 @@
             $rootScope.isAuth = false;
             $state.go("login");
         }
-        
+
         /**
          * Executes before every transition
          */
@@ -44,7 +44,7 @@
             } else {
                 const currentUrl = $state.current.name;
                 $rootScope.isAuth = "";
-                if (!(['login', 'signup'].includes(currentUrl))) {
+                if (!(APP_CONSTANTS.ROUTES.UNAUTH_ROUTES.includes(currentUrl))) {
                     $state.go('login');
                 }
             }
@@ -55,9 +55,24 @@
          * Executes if successful response is received
          */
         Restangular.addResponseInterceptor((data, operation, what, url, response, deferred) => {
-            $rootScope.loading = false;
+            $rootScope.loading = false;           
             return data;
         });
+
+        /**
+         * Shows toast for errors
+         */
+         const handleObjErrors = errors => {
+            for(let key in errors){
+                if((typeof errors[key]) === "string"){
+                    $mdToast.show($mdToast.simple().textContent(errors[key]));
+                } else if((typeof errors[key]) === "object") {
+                    for(let error of errors[key]){
+                        $mdToast.show($mdToast.simple().textContent(error));
+                    }
+                }
+            }
+        }
 
         /**
          * Executes if error is received
@@ -65,7 +80,17 @@
         Restangular.setErrorInterceptor(response => {
             $rootScope.loading = false;
             const key = response.status;
-            $state.go(APP_CONSTANTS.ERROR_ROUTES[key]);
+            const errors = response.data;
+            if((typeof errors) === "string"){
+                $mdToast.show($mdToast.simple().textContent(errors));
+            } else if((typeof errors) === "object") {
+                handleObjErrors(errors);
+            }
+            if(key in APP_CONSTANTS.ERROR_ROUTES){
+                $state.go(APP_CONSTANTS.ERROR_ROUTES[key], null, {
+                    location: 'replace'
+                });
+            }
             // Stop the promise chain.
             return true;
         });

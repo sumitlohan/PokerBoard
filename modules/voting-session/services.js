@@ -36,6 +36,15 @@
             }
 
             /**
+             * Fetches JIRA issue cooments from ticketID
+             * @param {*} query
+             * @returns JIRA issue details
+             */
+            this.getComments = ticketId => {
+                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.COMMENT + `?issueId=${ticketId}`).get();
+            }
+
+            /**
              * Add comment on JIRA issue
              * @param {Object} comment
              * @returns Comment on JIRA
