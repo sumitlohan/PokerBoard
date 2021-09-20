@@ -40,8 +40,12 @@
                 }, err => {});
             }
 
-            $scope.removeMember = (id) => {
-                groupService.removeMember(groupId, {"userId": id}).then(response=>{
+            $scope.setDeleteNumber = id => {
+                $scope.delMember = id;
+            };
+
+            $scope.removeMember = () => {
+                groupService.removeMember(groupId, {"userId": $scope.delMember}).then(response=>{
                     $scope.getGroupDetails();
                 }, err=>{
                     console.log(err);
