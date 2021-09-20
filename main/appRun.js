@@ -12,7 +12,6 @@
             $rootScope.isAuth = false;
             $state.go("login");
         }
-
         /**
          * Executes before every transition
          */
