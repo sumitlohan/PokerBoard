@@ -1,8 +1,8 @@
 'use strict';
 (function () {
     angular.module('pokerPlanner').controller('groupDetailsCtrl', [
-        '$scope', '$stateParams', 'groupService',
-        function ($scope, $stateParams, groupService) {
+        '$scope', '$stateParams', '$rootScope', 'groupService',
+        function ($scope, $stateParams, $rootScope, groupService) {
             /*
             Pattern of data that is to be stored in $scope.group ->
              {
@@ -29,7 +29,8 @@
             $scope.group = {};
             const groupId = $stateParams.id;
             $scope.email = "";
-            
+            $scope.uid = $rootScope.user.id;
+
             /**
              * @description create members in the group
              */
@@ -37,6 +38,14 @@
                 groupService.createMember($scope.email, $scope.group.id).then(response => {
                     $scope.group.members = [...$scope.group.members, {user: response.user}]
                 }, err => {});
+            }
+
+            $scope.removeMember = (id) => {
+                groupService.removeMember(groupId, {"userId": id}).then(response=>{
+                    $scope.getGroupDetails();
+                }, err=>{
+                    console.log(err);
+                });
             }
 
             /**
