@@ -19,6 +19,7 @@
             DELETE_MEMBERS: 'groups/remove-members',
             GET_USER_VOTES: 'pokerboards/votes',
             ACCOUNT_ACTIVATE: 'accounts/activate/',
+            TIME: 'pokerboards/time'
         },
         ERROR_MESSAGES: {
             EMAIL: 'user with this email already exists.',

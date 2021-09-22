@@ -31,6 +31,19 @@
                     response.pokerboards.forEach(parsePokerboard);
                     response.groups.forEach(parseGroup);
                 });
+
+                // Gets estimation time and ticket_id for all tickets estimated by current user
+                profileService.getEstimationTime().then(response => {
+                    $scope.estimations = response;
+                    var time = []
+                    for(let i=0; i<$scope.estimations.length; i++) {
+                        time.push(parseInt($scope.estimations[i].estimation_time))
+                    }
+                    const sum = time.reduce((a, b) =>  a + b, 0);
+                    $scope.avg_time = sum/time.length;
+                    $scope.max_time = time.reduce((a, b) => (a > b) ? a : b);
+                    $scope.min_time = time.reduce((a, b) => (a < b) ? a : b);
+                });
             };
 
             init();

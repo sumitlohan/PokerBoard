@@ -89,4 +89,18 @@
             <span>{{ ticket.ticket_id }} : {{ticket.estimate}}</span>
         </li>
     </div>
+    <div class="my-4">
+        <div class="tab-head">
+            <p>ESTIMATION TIME</p>
+        </div>
+        <p class="mx-1" ng-show="pokerboard.estimated.length==0">You have not estimated any tickets yet!!</p>
+        <li class="mx-1 bg-primary d-inline badge" ng-repeat="estimation in estimations">
+            <span>{{ estimation.game_session }} : {{ estimation.estimation_time }} seconds</span>
+        </li>
+        <div class="mt-4 d-flex">
+            <p>Avg time: {{ avg_time }}</p>
+            <p class="mx-5">Max time: {{ max_time }}</p>
+            <p>Min time: {{ min_time }}</p>
+        </div>
+    </div>
 </div>

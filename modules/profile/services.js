@@ -24,5 +24,13 @@
             this.updateUser = function (id, data) {
                 return Restangular.one(APP_CONSTANTS.API_ENDPOINT.USER_PROFILE, id).customPATCH(data);
             };
+
+            /**
+             * Gets estimation time and ticket_id for all tickets estimated by current user
+             * @returns estimation details
+             */
+            this.getEstimationTime = () => {
+                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.TIME).get();
+            }
         }]);
 })();
