@@ -69,6 +69,7 @@
     </div>
     <div class="main-outer">
         <h4 class="main-heading">Tickets</h4>
+        <p class="mx-1" ng-show="pokerboard.tickets.length==0">Congrats!!! You have estimated all your tickets</p>
         <div>
             <div class="tab-head">
                 <p>TICKET ID</p>
@@ -80,7 +81,7 @@
             <div class="tab-content">
                 <p>{{ ticket.ticket_id }}</p>
                 <p class="w-50">{{ ticket.summary }}</p>
-                <button ng-show="user.id==pokerboard.manager.id" class="join-btn bg-dark">Estimate</button>
+                <button ng-show="user.id==pokerboard.manager.id" ng-click="createSession(ticket.id)" class="join-btn bg-dark">Estimate</button>
                 <button ng-show="user.id==pokerboard.manager.id" ng-click="moveUp($index)" class="btn-delete bg-dark mx-1"><i class="bi bi-arrow-up"></i></button>
                 <button ng-show="user.id==pokerboard.manager.id" ng-click="moveDown($index)" class="btn-delete bg-dark mx-1"><i class="bi bi-arrow-down"></i></button>
             </div>
@@ -94,6 +95,10 @@
             <div class="tab-head">
                 <p>ESTIMATED TICKETS</p>
             </div>
+            <p class="mx-1" ng-show="pokerboard.estimated.length==0">You have not estimated any tickets yet!!</p>
+            <li style="width: fit-content;" class="mx-1 bg-primary d-inline badge" ng-repeat="ticket in pokerboard.estimated">
+                <span>{{ ticket.ticket_id }} : {{ticket.estimate}}</span>
+            </li>
         </div>
     </div>
 </div>

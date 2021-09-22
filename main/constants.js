@@ -16,6 +16,7 @@
             USER_PROFILE: 'accounts/user/',
             GROUPS: 'groups/',
             CREATE_MEMBERS: 'groups/create-members',
+            GET_USER_VOTES: 'pokerboards/votes',
             ACCOUNT_ACTIVATE: 'accounts/activate/',
         },
         ERROR_MESSAGES: {
@@ -31,10 +32,6 @@
         },
         SUCCESS_MESSAGES: {
             COMMENT_ADDED: 'Comment added successfully',
-        },
-        POKERBOARD_STATUS: {
-            1: 'STARTED',
-            2: 'ENDED'
         },
         DECK_NAME: {
             1: 'Serial',
@@ -64,7 +61,7 @@
             //access whether user is authenticated or not
             PUBLIC_ROUTES: ['404-page-not-found', '500-internal-server-error'],
             //acess only when user is not authenticated
-            UNAUTH_ROUTES: ['login', 'signup']
+            UNAUTH_ROUTES: ['login', 'signup', 'email-verification']
         },
         ERROR_ROUTES: {
             404: '404-page-not-found',

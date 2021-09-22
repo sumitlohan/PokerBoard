@@ -1,10 +1,12 @@
 'use strict';
 (function () {
     angular.module("pokerPlanner").config([
-        '$stateProvider', '$urlRouterProvider', 'RestangularProvider', 'APP_CONSTANTS',
+        '$stateProvider', '$urlRouterProvider', '$locationProvider', 'RestangularProvider', 'APP_CONSTANTS',
         function (
-            $stateProvider, $urlRouterProvider, RestangularProvider, APP_CONSTANTS,
+            $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APP_CONSTANTS,
         ) {
+            $locationProvider.hashPrefix('');
+
             $stateProvider
                 .state('404-page-not-found', {
                     url: '/404-page-not-found',

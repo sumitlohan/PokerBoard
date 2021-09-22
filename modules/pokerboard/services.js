@@ -36,6 +36,15 @@
             }
 
             /**
+             * Get session
+             * @param {*} data 
+             * @returns session details
+             */
+             this.getSession = id => {
+                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.GAME_SESSION, id).get();
+            }
+
+            /**
              * Creates session
              * @param {Object} data 
              * @returns session details

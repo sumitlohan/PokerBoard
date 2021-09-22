@@ -38,13 +38,16 @@
             }
             init();
 
+            $scope.setDeleteNumber = id => {
+                $scope.delMember = id;
+            };
+
             /**
              * Removes a member
-             * @param {integer} id 
              */
-            $scope.removeMember = id => {
-                memberService.removeMember(id);
-                $scope.members = $scope.members.filter(member => member.id != id);
+            $scope.removeMember = () => {
+                memberService.removeMember($scope.delMember);
+                $scope.members = $scope.members.filter(member => member.id != $scope.delMember);
             }
         }]);
 })();

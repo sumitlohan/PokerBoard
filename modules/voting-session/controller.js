@@ -124,9 +124,19 @@
                 data.forEach(parseUsers);
             };
 
+            const updateVote = (id, estimate) => {
+                /* Updating already voted estimate of user */
+                for (let i = 0; i < $scope.voteList.length; i++) {
+                    if ($scope.voteList[i].id == id) {
+                        $scope.voteList.splice(i, 1);
+                        return;
+                    }
+                }
+            };
+            
             const addRealTimeVotedUser = data => {
                 /* Adding user who voted to the list for UI */
-                // updateVote(data.user.id, data.user.estimate);
+                updateVote(data.user.id, data.user.estimate);
                 $scope.voteList = $scope.voteList.filter(ele => ele.id != data.user.id);
                 let first_name = data.user.first_name;
                 let last_name = data.user.last_name;
@@ -229,6 +239,16 @@
                 }, error => {
                     $state.go('404-page-not-found');
                 });
+            };
+
+            $scope.setTicketEstimate = () => {
+                const data = {
+                    message: {
+                        estimate: $scope.ticketEstimate
+                    },
+                    message_type: "estimate"
+                }
+                $scope.websocket.send(data);
             };
 
             init();
