@@ -1,10 +1,5 @@
-<div class="m-2">
-  <div class="d-flex justify-content-between">
-    <h1>Groups</h1>
-    <button data-bs-toggle="modal" data-bs-target="#createGroupModal" ng-show="true" class="mt-3 btn btn-success">Create group</button>
-  </div>
-  <h5 style="text-align: center;" class="mt-3" ng-show="groups.length == 0">No Groups Found</h5>
-
+<div class="main-outer">
+  <h4 class="main-heading">Recent Groups</h4>
     <!-- Modal -->
   <div class="modal fade" id="createGroupModal" tabindex="-1" aria-labelledby="createGroupModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -30,12 +25,24 @@
       </div>
     </div>
   </div>
-  <div class="mt-3">
-    <li class="card mt-2" ng-repeat="group in groups">
-      <div class="card-body d-flex justify-content-between">
-        {{ group.name }}
-        <a href="#!groups/{{ group.id }}" class="btn btn-danger">View group</a>
+  <button data-bs-toggle="modal" data-bs-target="#createGroupModal" class="new-btn bg-dark"><i class="ic-plus fa fa-plus"></i>New group</button>
+  <p class="mt-4 main-heading" ng-show="!(groups.length)">You have not created/joined any group yet!</p>
+  <div ng-show="groups.length">
+      <div class="tab-head">
+          <p>NAME</p>
+          <p>CREATED AT</p>
+          <p>MEMBERS</p>
       </div>
-    </li>
+      <div class="hor-rule"></div>
+  </div>
+  <div ng-repeat="group in groups">
+      <div class="tab-content">
+          <p>{{ group.name }}</p>
+          <p>{{ group.created_at }}</p>
+          <p>{{ group.members }}</p>
+          <a href="#groups/{{group.id}}" class="btn btn-dark join-btn bg-dark">View group</a>
+          <button ng-click="deleteGroup(group.id)" ng-show="user.id==group.created_by" class="btn-delete bg-dark"><i class="fa fa-trash"></i></button>
+      </div>
+      <div class="hor-rule"></div>
   </div>
 </div>

@@ -16,6 +16,7 @@
             USER_PROFILE: 'accounts/user/',
             GROUPS: 'groups/',
             CREATE_MEMBERS: 'groups/create-members',
+            DELETE_MEMBERS: 'groups/remove-members',
             GET_USER_VOTES: 'pokerboards/votes',
             ACCOUNT_ACTIVATE: 'accounts/activate/',
         },

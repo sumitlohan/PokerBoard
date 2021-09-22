@@ -24,6 +24,11 @@
                 return Restangular.all(APP_CONSTANTS.API_ENDPOINT.CREATE_MEMBERS).post(user);
             }
 
+            this.removeMember = (id, data) => {
+                // Remove Member from the group
+                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.DELETE_MEMBERS, id).remove(data);
+            }
+
             /**
              * @description create group service
              * @param {object} group 
@@ -34,10 +39,19 @@
             };
 
             /**
+             * Deletes group
+             * @param {object} group 
+             */
+            this.deleteGroup = (group) => {
+                // delete group service
+                return Restangular.one(APP_CONSTANTS.API_ENDPOINT.GROUPS, group).remove();
+            };
+
+            /**
              * @description get group list service
              * @returns list of group
              */
-            this.getGroupsList = () => {
+            this.getGroups = () => {
                 return Restangular.all(APP_CONSTANTS.API_ENDPOINT.GROUPS).getList();
             };
     }]); 
